@@ -1,0 +1,82 @@
+const Zahialga = require("../models/zahialga");
+const Error = require("../middleware/error");
+const asyncHandler = require("../middleware/asyncHandler");
+const User = require("../models/user")
+
+exports.getZahialgas = asyncHandler(async(req,res,next)=>{
+    const zahialgas = await Zahialga.find().populate("userCode").populate("nomCode")
+    res.status(200).json({
+        success: true,
+        count: zahialgas.length,
+        data: zahialgas
+    })
+});
+exports.getZahialga = asyncHandler(async(req,res,next)=>{
+    const zahialga = await Zahialga.findById(req.params.id)
+        if(!zahialga){
+            throw new Error(req.params.id + "ID tai zahialga baihgui baina",400)
+        }
+        res.status(200).json({
+            success: true,
+            data: zahialga
+        })
+});
+//1user zahialga shiidel 
+exports.getUserZahialgud = asyncHandler(async(req,res,next)=>{
+    const zahialgas = await Zahialga.find().populate("nomCode");
+    res.status(200).json({
+        success: true,
+        count: zahialgas.length,
+        data: zahialgas
+    })
+});
+//tuhain 1 userin zahialgud
+exports.getUserZahialga = asyncHandler(async(req,res,next)=>{
+    const zahialga = await Zahialga.find({userCode: req.params.userCodeId})
+        if(!zahialga){
+            throw new Error(req.params.id + 'ID tai hereglegch baihgui baina',400);
+        }
+        res.status(200).json({
+            success: true,
+            count: zahialga.length,
+            data: zahialga
+        })
+})
+//zahialga uusgeh
+exports.createZahialga = asyncHandler(async(req,res,next)=>{
+    // const user = await User.findById(req.params.userCodeId)
+    //     if(!user){
+    //         throw new Error(req.params.userCodeId + 'ID tai user baihgui baina',404);
+    //     }
+    const zahialga = await Zahialga.create(req.body)
+    res.status(200).json({
+        success: true,
+        data: zahialga
+    })
+})
+//zahialga zasah
+exports.updateZahialga = asyncHandler(async(req,res,next)=>{
+  const zahialga = await Zahialga.findByIdAndUpdate(req.params.id, req.body, {
+    new: true, 
+    runValidators: true,
+  })
+    if(!zahialga){
+        throw new Error(req.params.id + 'Id tai zahialga baihgui baina', 400)
+    }
+    res.status(200).json({
+        success: true,
+        data: zahialga
+    })
+})
+//1zahialga ustgah 
+exports.deleteZahialga = asyncHandler(async(req,res,next)=>{
+    const zahialga = await Zahialga.findById(req.params.id)
+        if(!zahialga){
+            throw new Error(req.params.id + 'ID tai zahialga baihgui baina',400)
+        }
+        res.status(200).json({
+            success: true,
+            data: zahialga
+        })
+})
+

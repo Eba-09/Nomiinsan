@@ -1,0 +1,40 @@
+const mongoose = require("mongoose")
+const bcrypt = require('bcrypt')
+const UserSchema = new mongoose.Schema({
+    Fname: {
+        type: String,
+        required: [true, 'Хэрэглэгчийн нэрийг оруулна уу'],
+    },
+    Lname: {
+        type: String,
+        required: [true, 'Хэрэглэгчийн нэрийг оруулна уу'],
+    },
+    email: {
+        type: String,
+        required: [true, "Хэрэглэгчийн эмэйл хаягийг оруулна уу"],
+        unique: true,
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "Эмэйл хаяг буруу байна"]
+    },
+    utas: {
+        type: String,
+        repuired: [true, 'Хэрэглэгчийн утасны дугаарыг оруулна уу'],
+        select: false
+    },
+    password: {
+        type: String,
+        minLength: 4,
+        required: [true, "Нууц үгээ оруулна уу"],
+        select: false
+    },
+    resetPasswordToken: String,
+    resetPassowrdExpire: Date,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+})
+// UserSchema.pre("save", async function () {
+//     const salt = await bcrypt.genSalt(10)
+//     this.password = await bcrypt.hash(this.password, salt)
+// })
+module.exports = mongoose.model("Users", UserSchema)
