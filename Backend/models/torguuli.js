@@ -2,11 +2,11 @@ const mongoose = require("mongoose")
 const TorguuliSchema = new mongoose.Schema({
     userCode:{
         type:mongoose.Schema.ObjectId,
-        ref: 't2.users',
+        ref: 'Users',
     },
     zeelCode:{
         type:mongoose.Schema.ObjectId,
-        ref: 't2.zeels',
+        ref: 'Zeels',
     },
     tailbar: {
         type: String,
@@ -15,12 +15,12 @@ const TorguuliSchema = new mongoose.Schema({
     },
     sanchCode:{
         type:mongoose.Schema.ObjectId,
-        ref: 't2.nomsanches',
+        ref: 'Nomsanch',
     },
     dun:{
         type: Number,
         min: [5000, 'hamgiin bagada 5000 baina'],
-        max: [100000, 'hamgin ihdee 100000 baina'],
+        max: [500000, 'hamgin ihdee 100000 baina'],
         required:[true, 'Torguulin hemjeeg oruul']
     },
     tulsun:{

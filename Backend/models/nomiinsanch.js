@@ -6,7 +6,6 @@ const NomiinsanchSchema = new mongoose.Schema({
         trim: true,
         maxLength: [50,'Овог нэрийг заавал бөглөх ёстой'],
     },
-    
       sanchLN: {
         type: String,
         required: [true, 'Өөрийн нэрийг оруулна уу?'],

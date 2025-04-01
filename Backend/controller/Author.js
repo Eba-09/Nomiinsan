@@ -10,6 +10,7 @@ exports.getAuthors = asyncHandler(async(req,res,next)=>{
         data: authors,
     })
 })
+
 //1 zohiogc haruulah
 exports.getAuthor = asyncHandler (async(req,res,next)=>{
     const author = await Author.findById(req.params.id)
