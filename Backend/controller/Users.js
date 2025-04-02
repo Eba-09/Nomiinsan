@@ -23,7 +23,7 @@ const createToken = (id) => {
 
 // Register
 exports.userRegister = async (req, res) => {
-    const { Fname, Lname, oyutniCode,email, utas,password  } = req.body;
+    const { Fname, Lname, oyutniCode,email, utas, password  } = req.body;
     try {
         // Email бүртгэлтэй эсэхийг шалгах
         const exists = await User.findOne({ email });

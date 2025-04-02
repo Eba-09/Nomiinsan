@@ -12,7 +12,7 @@ const BookSchema = new mongoose.Schema({
     },
     authorId: {
         type: mongoose.Schema.ObjectId,
-        ref: 'Authors',
+        ref: 'authors',
         repuired: true,
     },
     isbn: {
@@ -48,23 +48,23 @@ const BookSchema = new mongoose.Schema({
     },
     huudas: {
         type: Number,
-        max: [500, 'Ном дээд талдаа 500 хуудастай байх.'], 
+        max: [700, 'Ном дээд талдаа 500 хуудастай байх.'], 
     },
     available:['new','old', 'kindle', 'pdf'],
     bairshil: {
         type: String,
         required: [true, "Номын байршилыг оруулна уу"],
         trim: true,
-        maxLength: [100, 'Номын байршил нь ихдээ 100 тэмдэгт байх'],
+        maxLength: [200, 'Номын байршил нь ихдээ 100 тэмдэгт байх'],
     },
     category:{
         type: mongoose.Schema.ObjectId,
-        ref: 'Categories', //reference buyu zaagch torol
+        ref: 'categories', //reference buyu zaagch torol
         required: true
     },
     createUser:{
         type:mongoose.Schema.ObjectId,
-        ref: 'Nomsanch',
+        ref: 'nomsanches',
     },
     createAt: {
         type: Date,

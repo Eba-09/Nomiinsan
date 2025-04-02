@@ -2,7 +2,9 @@ const Book = require("../models/book")
 const Error = require("../middleware/error")
 const asyncHandler = require("../middleware/asyncHandler");
 const Category = require("../models/Category");
-const Author = require("../models/Author");
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
 //buh nom harah
 exports.getBooks = asyncHandler(async(req, res, next)=>{
     const books = await Book.find()
@@ -48,15 +50,46 @@ exports.getBook = asyncHandler(async(req,res,next)=>{
 })
 //1nom medeelel uusgeh
 exports.createBook = asyncHandler(async(req,res,next)=>{
-    // const category = await Category.findById(req.params.categoryIdId)
-    //     if(!category){
-    //         throw new Error(req.params.categoryIdId + 'ID tai category baihgui baina',404);
-    //     }
-    const book = await Book.create(req.body)
-    res.status(200).json({
-        success: true,
-        data: book
-    })
+    if (!req.body || !req.file) {
+        return res.status(400).send('Фото болон мэдээллийг бүрдүүлнэ үү!');
+      }
+      const { category } = req.body;
+    const catid = await Category.findById(category);  // Ensure async await for correct handling
+    if (!catid) {
+        console.log("Category not found");
+    }
+    // Бусад өгөгдлүүдийг авч байна
+    const { name, authorId, isbn, rating, price, hel, hewlesenOgnoo, too, huudas, available, bairshil,  createUser } = req.body;
+    // Зургийн замыг хадгална
+    const photoPath = `/uploads/${req.file.filename}`;
+    // Номын өгөгдлийг хадгалах (дараагийн алхам бол өгөгдлийн сан руу хадгалах)
+    const bookData = {
+        name,
+        photo: photoPath,
+        authorId,
+        isbn,
+        rating,
+        price,
+        hel,
+        hewlesenOgnoo,
+        too,
+        huudas,
+        available,
+        bairshil,
+        category,
+        createUser
+    };
+    const newBook = new Book(bookData);
+    await newBook.save()
+        .then(() => {
+            console.log('Ном амжилттай хадгалагдлаа:', bookData);
+            return res.status(200).json({ message: 'Ном амжилттай хадгалагдлаа!', data: bookData });
+        })
+        .catch((error) => {
+            console.log('Error saving book:', error);
+            return res.status(500).send('Ном хадгалахад алдаа гарлаа');
+        });
+    
 })
 // 1 nom medeelel uurcluh
 exports.updateBook = asyncHandler(async(req,res,next)=>{

@@ -33,6 +33,13 @@ exports.getCategory = asyncHandler(async(req,res,next)=>{
 //create Category
 exports.createCategory = asyncHandler(async(req,res,next)=>{
     try{
+        const burtgesen = await Category.find(req.body);
+        if(burtgesen){
+            res.status(404).json({
+                success: false,
+                data: 'Ene category burtgeltei baina'
+            })
+        }
         const category = await Category.create(req.body)
         res.status(200).json({
             success: true,
