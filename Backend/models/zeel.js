@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 const ZeelSchema = new mongoose.Schema({
     nomCode:{
             type: mongoose.Schema.ObjectId,
@@ -12,7 +12,7 @@ const ZeelSchema = new mongoose.Schema({
     },
     sanchCode:{
         type: mongoose.Schema.ObjectId,
-        ref: 'Nomsanch', //reference buyu zaagch torol
+        ref: 'Nomsanches', //reference buyu zaagch torol
         required: true
     },
     nomawsanDate: {
@@ -29,4 +29,4 @@ const ZeelSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('Zeels', ZeelSchema);
+module.exports = mongoose.model('Zeels', ZeelSchema)

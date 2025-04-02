@@ -10,7 +10,6 @@ exports.getAuthors = asyncHandler(async(req,res,next)=>{
         data: authors,
     })
 })
-
 //1 zohiogc haruulah
 exports.getAuthor = asyncHandler (async(req,res,next)=>{
     const author = await Author.findById(req.params.id)
@@ -31,7 +30,7 @@ exports.createAuthor = asyncHandler(async(req,res,next)=>{
 exports.deleteAuthor = asyncHandler(async(req,res,next)=>{
     const author = await Author.findById(req.params.id)
     if(!author){
-        throw new Error(req.params.id+ 'Id tai hereglegch baihgui baina.' ,400)
+        throw new Error(req.params.id+ 'Id tai zohiogch baihgui baina.' ,400)
     }
     res.status(200).json({
         success: true,

@@ -4,6 +4,7 @@ import './App.css';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Navbar from './Components/Navbars';
+import ImageUploader from './Components/ImageUploader';
 function App() {
   const [search, setSearch] = useState('');
   return (
@@ -47,6 +48,7 @@ function App() {
         <div className="flex-grow">
           <Routes>
             <Route path="/"/>
+            <Route path='/imageupload' element={<ImageUploader />} />
           </Routes>
         </div>
       </div>

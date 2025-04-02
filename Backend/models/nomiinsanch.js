@@ -26,9 +26,9 @@ const NomiinsanchSchema = new mongoose.Schema({
       },
       sanchPassword: {
         type: String,
-        minLength: 4,
+        minLength: 6,
         required: [true, "Нууц үгээ оруулна уу"],
-        select: false, //ene talbariig find() haruulahgui.
+        //ene talbariig find() haruulahgui.
     },
     resetPasswordToken: String,
     resetPassowrdExpire: Date,
@@ -38,5 +38,5 @@ const NomiinsanchSchema = new mongoose.Schema({
     }
     }
   )
-module.exports = mongoose.model("Nomsanch", NomiinsanchSchema)
+module.exports = mongoose.model("Nomsanches", NomiinsanchSchema)
     

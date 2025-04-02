@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 const DuremSchema = new mongoose.Schema({
     torguuli: {
         type: Number,
@@ -10,8 +10,7 @@ const DuremSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Торгуулийн ангиллыг оруулна уу'],
         trim: true,
-        maxLength: [400,'Ямар дүрэм зөрчиснийг дэлгэрэнгүй бичсэн байх'],
+        maxLength: [400,'Ямар дүрэм зөрчиснийг дэлгэрэнгүй бичсэн байх']
     }
-});
-
-module.exports = mongoose.model('Durems', DuremSchema);
+})
+module.exports = mongoose.model('Durems', DuremSchema)
