@@ -15,16 +15,16 @@ function App() {
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="bg-blue-600 text-white py-4 px-6 rounded-l shadow-lg flex justify-between items-center gap-7 sm:p-1 sm:gap-2 @xs:p-0 @xs:text-xs"
+        className=" text-blue-600 py-4 px-6 rounded-l shadow-sm flex justify-between items-center gap-7 sm:p-1 sm:gap-2"
       >
-        <h1 className="lg:text-lg xl:text-xl font-bold  sm:text-sm">📚 Мэдээлэл зүйн тэнхимийн номын сан</h1>
+        <h1 className="lg:text-lg text-sm md:text-md xl:text-xl 2xl:text-xl font-bold  sm:text-sm">📚 Мэдээлэл зүйн тэнхимийн номын сан</h1>
         <Navbar />
         <input 
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Ном хайх..."
-          className="p-2 rounded-md text-black bg-gray-300 transition-all duration-0.5 w-fit xs:w-20 focus:w-70 "
+          className="p-2 rounded-md text-black bg-gray-300 transition-all duration-0.5 w-fit xs:w-20 md:w-30 focus:w-60 "
         />
       </motion.header>
       {/* Main Content */}
