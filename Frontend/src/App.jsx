@@ -4,7 +4,10 @@ import './App.css';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Navbar from './Components/Navbars';
-import ImageUploader from './Components/ImageUploader';
+import ImageUploader from './Components/BookCreate';
+import SanchHome from './Pages/SanchHome';
+import SanchLogin from './Components/SanchLogin';
+import UserLogin  from './Components/UserLog';
 function App() {
   const [search, setSearch] = useState('');
   return (
@@ -49,6 +52,9 @@ function App() {
           <Routes>
             <Route path="/"/>
             <Route path='/imageupload' element={<ImageUploader />} />
+            <Route path='/sanchHome' element={<SanchHome />} />
+            <Route path='/sanchLogin' element={<SanchLogin />} />
+            <Route path='/userLogin' element={<UserLogin />} />
           </Routes>
         </div>
       </div>

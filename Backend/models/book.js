@@ -28,7 +28,7 @@ const BookSchema = new mongoose.Schema({
     price:{
         type: Number,
         required: [true, 'Номын үнийг оруулна уу.'],
-        min:[3000, 'Номын үнэ хамгийн багадаа 500 төгрөг байна.']
+        min:[3000, 'Номын үнэ хамгийн багадаа 3000 төгрөг байна.']
     },
     hel: {
         type: String,
@@ -48,7 +48,7 @@ const BookSchema = new mongoose.Schema({
     },
     huudas: {
         type: Number,
-        max: [700, 'Ном дээд талдаа 500 хуудастай байх.'], 
+        max: [700, 'Ном дээд талдаа 700 хуудастай байх.'], 
     },
     available:['new','old', 'kindle', 'pdf'],
     bairshil: {

@@ -12,7 +12,6 @@ exports.getSanchud = asyncHandler(async(req,res,next)=>{
         data: sanchud
     })
 })
-
 // Register
 // JWT Token үүсгэх функц
 const createToken = (id) => {
@@ -64,21 +63,17 @@ exports.sanchRegister = async (req, res) => {
 
 exports.sanchLogin = async (req, res) => {
     const { sanchMail, sanchPassword } = req.body;
-    console.log("Нэвтрэх хүсэлт:", req.body);
-
     try {
         // Хэрэв имэйл болон нууц үг хоосон байвал алдаа буцаах
         if (!sanchMail || !sanchPassword) {
             return res.status(400).json({ success: false, message: "Имэйл болон нууц үгээ оруулна уу" });
         }
-
         // Хэрэглэгч хайх
         const user = await Sanch.findOne({ sanchMail });
         if (!user) {
             return res.status(400).json({ success: false, message: "Хэрэглэгч олдсонгүй" });
         }
         const users = await Sanch.findOne({ sanchMail });
-        console.log(users);
         // Хэрэв нууц үг байхгүй бол алдаа буцаах
         if (!user.sanchPassword) {
             return res.status(400).json({ success: false, message: "Хэрэглэгчийн нууц үг олдсонгүй" });
@@ -91,8 +86,8 @@ exports.sanchLogin = async (req, res) => {
 
         // JWT Token үүсгэх
         const token = createToken(user._id);
-
         res.status(200).json({ success: true, token });
+        console.log("amjilttai newterlee");
     } catch (error) {
         console.error("Алдаа loginUser функцэд:", error);
         res.status(500).json({ success: false, message: "Серверийн алдаа гарлаа" });

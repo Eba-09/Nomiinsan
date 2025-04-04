@@ -63,7 +63,7 @@ exports.userRegister = async (req, res) => {
 
 exports.userLogin = async (req, res) => {
     const { oyutniCode, password } = req.body;
-    console.log("Нэвтрэх хүсэлт:", req.body);
+    
     try {
         // Хэрэв имэйл болон нууц үг хоосон байвал алдаа буцаах
         if (!oyutniCode || !password) {
@@ -76,7 +76,6 @@ exports.userLogin = async (req, res) => {
             return res.status(400).json({ success: false, message: "Хэрэглэгч олдсонгүй" });
         }
         const users = await User.findOne({ oyutniCode });
-        console.log(users);
         // Хэрэв нууц үг байхгүй бол алдаа буцаах
         if (!user.password) {
             return res.status(400).json({ success: false, message: "Хэрэглэгчийн нууц үг олдсонгүй" });
@@ -91,6 +90,7 @@ exports.userLogin = async (req, res) => {
         const token = createToken(user._id);
 
         res.status(200).json({ success: true, token });
+        console.log("amjilttai newterlee"+ users.Fname)
     } catch (error) {
         console.error("Алдаа loginUser функцэд:", error);
         res.status(500).json({ success: false, message: "Серверийн алдаа гарлаа" });
