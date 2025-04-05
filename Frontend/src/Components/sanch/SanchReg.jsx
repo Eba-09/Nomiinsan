@@ -32,7 +32,7 @@ const SanchReg = () => {
     transition={{duration: 0.6}}
     className='w-full flex flex-col justify-center items-center mt-24 font-sans'>
     <div className="bg-blue-100 shadow-md w-11/12 max-w-sm sm:w-80 md:w-96 text-sm sm:text-base md:text-lg pt-6 pb-6 px-4 rounded-2xl hover:shadow-lg flex flex-col gap-4 items-center justify-center">
-      <h4>Номын санчийн Бүртгэлийн хуудас</h4>
+      <h4>Номын санчийн бүртгэлийн хуудас</h4>
       <form onSubmit={SanchSubmit} className='flex flex-col w-fit gap-2'>
         <div className="email">
           <FontAwesomeIcon icon={faAddressBook} />

@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import "../../App.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressBook, faLock } from '@fortawesome/free-solid-svg-icons'
-const userLogin = () => {
+const UserLogin = () => {
     const [oyutniCode, setoyutniCode] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -44,11 +44,17 @@ const userLogin = () => {
         <button title="Нэвтрэх"  className='bg-green-400 hover:bg-green-500 rounded-2xl text-center pl-1.5 pr-1.5 md:w-50 sm:w-40 w-32 ' >Нэвтрэх</button>
         </div>
         </form>
+        <div className='flex flex-col items-center justify-center gap-1'>
+        <div className="flex items-center justify-center p-0.5">
+        <button className='bg-green-400 hover:bg-green-500 rounded-2xl text-center pl-1.5 pr-1.5 w-32 md:w-50 sm:w-40' onClick={() => navigate('/userReg')}>Бүртгүүлэх</button>
+        </div>
         <div className="flex items-center justify-center p-0.5">
         <button className='bg-green-400 hover:bg-green-500 rounded-2xl text-center pl-1.5 pr-1.5 w-32 md:w-50 sm:w-40' onClick={() => navigate('/sanchLogin')}>Номын санчаар нэвтрэх</button>
         </div>
+        </div>
+        
     </div>
     </motion.div>
   )
 }
-export default userLogin;
+export default UserLogin;

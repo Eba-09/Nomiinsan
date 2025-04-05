@@ -11,6 +11,7 @@ import UserLogin  from './Components/user/UserLog';
 import UserReg from './Components/user/UserReg';
 import SanchReg from './Components/sanch/SanchReg';
 import LibraryHome from './Pages/LibraryHome';
+import Logo from './images/logos.png'
 function App() {
   const [search, setSearch] = useState('');
   return (
@@ -23,14 +24,17 @@ function App() {
         transition={{ duration: 0.6 }}
         className=" text-blue-600 py-4 px-6 rounded-l shadow-sm flex justify-between items-center gap-7 sm:p-1 sm:gap-2"
       >
-        <h1 className="lg:text-lg text-sm md:text-md xl:text-xl 2xl:text-xl font-bold  sm:text-sm">📚 Мэдээлэл зүйн тэнхимийн номын сан</h1>
+        <div className='flex flex-row items-center gap-1 sm:gap-5'>
+        <img src={Logo} width='40px' height="20px"/>
+        <h1 className="lg:text-lg text-sm md:text-md xl:text-xl 2xl:text-xl font-bold  sm:text-sm"> Мэдээлэл зүйн тэнхимийн номын сан</h1>
+        </div>    
         <Navbar />
         <input 
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Ном хайх..."
-          className="p-2 rounded-md text-black bg-gray-300 transition-all duration-0.5 w-full xs:w-20 md:w-30 lg:w-40 lg:focus:w-50 focus:w-30 sm:focus:w-30 md:focus:40 "
+          className="p-2 rounded-md text-black bg-gray-300 transition-all duration-0.5 w-full xs:w-20 md:w-30 lg:w-40 lg:focus:w-50 focus:w-30 sm:focus:w-30 md:focus:40 outline-0 "
         />
       </motion.header>
         <div>
