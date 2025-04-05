@@ -63,17 +63,14 @@ const BookCreate = () => {
     })
     .then((response) => {
         console.log("Success:", response.data);
-        alert("amjilltai zurag oruullaa.");
+        alert("Ном амжилттай үүслээ");
     })
     .catch((error) => {
         console.error("Error:", error);
     });};  
     return (
-        <div className='nom-burtgel'>
-            <div className='Navbars'>
-                <button title="Log-out" onClick={() => navigate('/')} />
-            </div>
-            <div className="burtgel-cont">
+        <div className='min-h-full w-fit bg-gray-100 text-gray-900 p-8'>
+            <div className="bg-white p-2 mr-2 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
                 <form onSubmit={handleSubmit}>
                     <div className="book-input">
                         <FontAwesomeIcon icon={faBook} />
@@ -117,22 +114,35 @@ const BookCreate = () => {
                     </div>
                     <div className="flex flex-col">
                         <p>Зохиолчид:</p>
-                        {authors.map(author => (
-                            <p key={author._id} className='bg-amber-200 w-50 mt-1.5' onClick={() => {setAuthorId(author._id); console.log('authorid:', author._id)}}>{author.AuthorLname}</p>
-                        ))}
+                        <select
+                    id="authorSelect"
+                     className="w-50 p-2 rounded"
+                     onChange={(e) => {
+                       setAuthorId(e.target.value);
+                     }}>
+                     <option value="">-- Сонгох --</option>
+                     {authors.map((author) => (
+                       <option key={author._id} value={author._id}>
+                         {author.AuthorLname}
+                       </option>
+                     ))}
+            </select>
                     </div>
                     <div className="flex flex-col">
                         <p>Категориуд:</p>
-                        {categories.map(category => (
-                           <p key={category._id} className='bg-amber-100 w-50' onClick={() => { 
-                            setCategory(category._id); 
-                            console.log("Selected cat ID:", category._id); 
-                        }}>
-                           {category.name}
-                         </p>
-                        ))}
-                        
-
+        <select
+                    id="categorySelect"
+                     className="w-50 p-2 rounded"
+                     onChange={(e) => {
+                       setCategory(e.target.value);
+                     }}>
+                     <option value="">-- Сонгох --</option>
+                     {categories.map((category) => (
+                       <option key={category._id} value={category._id}>
+                         {category.name}
+                       </option>
+                     ))}
+            </select>
                     </div>
                     <div className="book-input">
                         <FontAwesomeIcon icon={faBook} />

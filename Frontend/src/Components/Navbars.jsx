@@ -21,7 +21,6 @@ const Navbar = () => {
           {isOpen ? <FontAwesomeIcon icon={faBars} /> : <FontAwesomeIcon icon={faXmark} />}
         </button>
       </div>
-      
       {/* Mobile dropdown menu */}
       {isOpen && (
         <div className="md:hidden flex flex-col items-start gap-2 py-1 mt-2 rounded-lg">

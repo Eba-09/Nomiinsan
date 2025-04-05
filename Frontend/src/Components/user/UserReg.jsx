@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAddressBook, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faLock, faEnvelope,faPhone, faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import "../../App.css";
@@ -45,23 +45,23 @@ return (
         </div>
         <div className="email">
             <FontAwesomeIcon icon={faAddressBook} />
-            <input placeholder="Нэрээ оруулна уу." type="text" className='focus:outline-0' onChange={(e) => setLname(e.target.value)} />
+            <input placeholder="Таны нэр" type="text" className='focus:outline-0' onChange={(e) => setLname(e.target.value)} />
         </div>
         <div className="email">
-            <FontAwesomeIcon icon={faAddressBook} />
+        <FontAwesomeIcon icon={faCircleUser} />
             <input placeholder="Оюутны код" type="text" className='focus:outline-0' onChange={(e) => setOyutniCode(e.target.value)} />
         </div>
         <div className="email">
-            <FontAwesomeIcon icon={faAddressBook} />
-            <input placeholder="И-мэйл ээ оруулна уу." className='focus:outline-0' type="email" onChange={(e) => setEmail(e.target.value)} />
+        <FontAwesomeIcon icon={faEnvelope} />
+            <input placeholder="И-мэйл" className='focus:outline-0' type="email" onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div className="email">
-            <FontAwesomeIcon icon={faAddressBook} />
-            <input placeholder="Утас оруулна уу." type="text" className='focus:outline-0' onChange={(e) => setUtas(e.target.value)} />
+        <FontAwesomeIcon icon={faPhone} />
+            <input placeholder="Утас" type="text" className='focus:outline-0' onChange={(e) => setUtas(e.target.value)} />
         </div>
         <div className="pass">
             <FontAwesomeIcon icon={faLock} />
-            <input placeholder="Нууц үгээ оруулна уу." className='focus:outline-0' type="password" onChange={(e) => setPassword(e.target.value)} />
+            <input placeholder="Нууц үг" className='focus:outline-0' type="password" onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className='flex items-center justify-center p-0.5'>
             <button title="Бүртгүүлэх" className='bg-green-400 hover:bg-green-500 rounded-2xl text-center pl-1.5 pr-1.5 max-w-32 w-fit' onClick={() => UserSubmit()}>Бүртгүүлэх</button>

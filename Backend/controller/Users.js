@@ -63,18 +63,16 @@ exports.userRegister = async (req, res) => {
 
 exports.userLogin = async (req, res) => {
     const { oyutniCode, password } = req.body;
-    
+    const OyutniiCode = oyutniCode.trim().toLowerCase();
     try {
         // Хэрэв имэйл болон нууц үг хоосон байвал алдаа буцаах
-        if (!oyutniCode || !password) {
+        if ( !oyutniCode || !password) {
             return res.status(400).json({ success: false, message: "Имэйл болон нууц үгээ оруулна уу" });
         }
-
-        // Хэрэглэгч хайх
-        const user = await User.findOne({ oyutniCode });
-        if (!user) {
-            return res.status(400).json({ success: false, message: "Хэрэглэгч олдсонгүй" });
-        }
+        const code = oyutniCode.trim().toLowerCase();
+        const user = await User.findOne({
+        oyutniCode: { $regex: `^${code}$`, $options: "i" }
+        });
         const users = await User.findOne({ oyutniCode });
         // Хэрэв нууц үг байхгүй бол алдаа буцаах
         if (!user.password) {
@@ -88,28 +86,28 @@ exports.userLogin = async (req, res) => {
         // JWT Token үүсгэх
         const token = createToken(user._id);
         res.status(200).json({ success: true, token });
-        console.log("amjilttai newterlee"+ users.Fname)
+        console.log("amjilttai newterlee")
     } catch (error) {
-        console.error("Алдаа loginUser функцэд:", error);
+        console.error("Алдаа userLogin функцэд:", error);
         res.status(500).json({ success: false, message: "Серверийн алдаа гарлаа" });
     }
 };
 //1 hereglegch haruulah
-exports.getOneUser = asyncHandler(async (req,res,next)=>{
-    const user = await User.findById(req.params.id)
-    if(!user){
-        throw new MyError(req.params.id + 'ID tai hereglegch baihgui baina')
-    }
-    res.status(200).json({
+exports.getOneUser = asyncHandler(async (req, res, next) => {
+    if (!req.user) {
+        res.status(404);
+        console.log("Хэрэглэгч олдсонгүй");
+      }
+      res.status(200).json({
         success: true,
-        user: user,
-    })
-})
+        data: req.user, 
+      });
+    });
 //1 hereglegchin medeelel ustgah
 exports.deleteUser = asyncHandler(async (req,res,next)=>{
     const user = await User.findByIdAndDelete(req.params.id)
     if(!user){
-        throw new MyError(req.params.id + 'ID tai hereglegch baihgui baina.', 400)
+        console.log(req.params.id + 'ID tai hereglegch baihgui baina.', 400)
     }
     res.status(200).json({
         success: true,
@@ -123,7 +121,7 @@ exports.updateUser = asyncHandler(async(req,res,next)=>{
         runValidators: true
     })
     if(!user) {
-        throw new MyError(req.params.id + 'ID tai hereglegch baihgui', 400)
+        console.log(req.params.id + 'ID tai hereglegch baihgui', 400)
     }
     res.status(200).json({
         success: true, 

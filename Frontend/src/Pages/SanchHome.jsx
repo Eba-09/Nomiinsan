@@ -1,8 +1,9 @@
 import React from 'react'
-import Login from '../Components/sanch/SanchLogin'
 const SanchHome = () => {
   return (
-    <div>Номын санч</div>
+    <div>
+      <h4>head</h4>
+    </div>
   )
 }
 export default SanchHome

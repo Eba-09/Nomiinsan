@@ -9,6 +9,7 @@ import { faAddressBook, faLock } from '@fortawesome/free-solid-svg-icons'
 const Login = () => {
     const [sanchMail, setEmail] = useState('');
     const [sanchPassword, setPassword] = useState('');
+    const [userdata, setuserdata] = useState('');
     const navigate = useNavigate();
     const logSubmit = (e) => {
       e.preventDefault();
@@ -17,7 +18,7 @@ const Login = () => {
           console.log(result)
           if (result.data.success) {
             alert("Амжилттай нэвтэрлээ");
-            navigate('/sanchHome');
+            navigate('/sanchHome', {state: {userdata : sanchMail}})
           }
         })
         .catch(err => console.log(err))

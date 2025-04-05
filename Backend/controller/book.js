@@ -17,10 +17,10 @@ exports.getBooks = asyncHandler(async(req, res, next)=>{
 //1 categort baiga buh nom
 exports.getCategoryBooks= asyncHandler(async(req, res, next)=>{
     let books;
-    if(req.params.categoryIdId === '675066c09a6c150358456885')
-        books = await Book.find().populate('authorId')
+    if(req.params.categoryId === '67f131d44f4702327dac47e8')
+        books = await Book.find().populate('authorId').populate('category')
     else
-    books = await Book.find({category: req.params.categoryId}).populate('authorId');
+    books = await Book.find({category: req.params.categoryId}).populate('category').populate('authorId');
     res.status(200).json({
         success: true,
         count: books.length,
@@ -30,7 +30,7 @@ exports.getCategoryBooks= asyncHandler(async(req, res, next)=>{
 //1 zohiolcin bicsen buh nomiig haruulah
 exports.getAuthorBooks = asyncHandler(async(req,res,next)=>{
     let books;
-        books = await Book.find({authorId: req.params.authorIdId})
+        books = await Book.find({authorId: req.params.authorIdId}).populate('authorId')
     res.status(200).json({
         success: true,
         count: books.length,

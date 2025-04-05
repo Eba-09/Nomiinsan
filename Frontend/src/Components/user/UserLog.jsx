@@ -14,16 +14,15 @@ const UserLogin = () => {
       e.preventDefault();
       axios.post('http://localhost:8000/api/lib/user/login', {oyutniCode, password})
         .then(result => {
-          console.log(result)
           if (result.data.success) {
             alert("Амжилттай нэвтэрлээ");
-            navigate('/sanchHome');
+            localStorage.setItem("token", result.data.token);
+            navigate('/userProfile');
           }
         })
         .catch(err => console.log(err))
     };
   return (
-    
     <motion.div 
     initial={{opacity: 0, x: -60}}
     animate={{opacity: 1, x: 0}}
@@ -58,3 +57,12 @@ const UserLogin = () => {
   )
 }
 export default UserLogin;
+export const fetchUserProfile = async (token) => {
+  const response = await fetch(`http://localhost:8000/api/lib/user/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return await response.json();
+};
