@@ -11,6 +11,8 @@ const sanchRouter = require("./router/nomSanch")
 const userRouter = require("./router/user")
 const categoryRouter = require("./router/Category")
 const bookRouter = require('./router/Book')
+const zahialgaRouter = require('./router/Zahialga');
+const zeelRouter = require('./router/Zeel')
 const cors = require('cors')
 var fs = require('fs')
 var path = require('path')
@@ -27,6 +29,8 @@ app.use('/api/lib/nomsanch', sanchRouter);
 app.use('/api/lib/user', userRouter);
 app.use('/api/lib/category',categoryRouter);
 app.use('/api/lib/book',bookRouter);
+app.use('/api/lib/zahialga', zahialgaRouter);
+app.use('/api/lib/zeel', zeelRouter);
 const server = app.listen(
     process.env.PORT,
     console.log(`express server ${process.env.PORT}`)

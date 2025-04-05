@@ -5,7 +5,7 @@ const User = require("../models/user");
 const Sanch = require("../models/nomiinsanch");
 const Zahialga = require("../models/zahialga");
 exports.getZeels = asyncHandler(async(req,res,next)=>{
-    const zeels = await Zeel.find().populate("t2.users")
+    const zeels = await Zeel.find().populate("userCode")
     res.status(200).json({
         success: true,
         count: zeels.length,
@@ -24,7 +24,7 @@ exports.getZeel = asyncHandler(async(req,res,next)=>{
 });
 //tuhain 1 userin zeeluud
 exports.getUserZeels = asyncHandler(async(req,res,next)=>{
-    const zeels = await Zeel.find({userCode: req.params.userCodeId})
+    const zeels = await Zeel.find({userCode: req.params.userCodeId}).populate("nomCode").populate("sanchCode")
         if(!zeels){
             throw new Error(req.params.id + 'ID tai hereglegch baihgui baina',400);
         }
@@ -47,17 +47,12 @@ exports.getSanchZeels = asyncHandler(async(req,res,next)=>{
 });
 //zeel uusgeh
 exports.createZeel = asyncHandler(async(req,res,next)=>{
-    const user = await User.findById(req.params.userCodeId)
-    const sanch = await Sanch.findById(req.params.sanchCodeId)
-    const zahialga = await Zahialga.findById(req.params.zahialgaCodeId)
-        if(!user){
+    const { nomCode, userCode, sanchCode } = req.body
+        if(!userCode){
             throw new Error(req.params.userCodeId + 'ID tai user baihgui baina',404);
         }
-        if(!sanch){
+        if(!sanchCode){
             throw new Error(req.params.userCodeId + 'ID tai sanch baihgui baina',404);
-        }
-        if(!zahialga){
-            throw new Error(req.params.userCodeId + 'ID tai zahialga baihgui baina',404);
         }
     const zeel = await Zeel.create(req.body)
     res.status(200).json({

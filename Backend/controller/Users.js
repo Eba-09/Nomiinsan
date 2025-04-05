@@ -87,7 +87,6 @@ exports.userLogin = async (req, res) => {
         }
         // JWT Token үүсгэх
         const token = createToken(user._id);
-        
         res.status(200).json({ success: true, token });
         console.log("amjilttai newterlee"+ users.Fname)
     } catch (error) {

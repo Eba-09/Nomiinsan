@@ -4,5 +4,5 @@ const {getCategory, getCategories, createCategory} = require("../controller/Cate
 const {getCategoryBooks} = require("../controller/book");
 router.route("/").get(getCategories).post(createCategory);
 router.route("/:id").get(getCategory);
-router.route("/book/:categoryIdId").get(getCategoryBooks);
+router.route("/book/:categoryId").get(getCategoryBooks);
 module.exports = router

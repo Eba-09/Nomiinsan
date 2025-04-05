@@ -4,7 +4,6 @@ const asyncHandler = require("../middleware/asyncHandler");
 const User = require("../models/user")
 const Zeel = require("../models/zeel");
 const Sanch = require("../models/nomiinsanch");
-
 exports.getTorguulis = asyncHandler(async(req,res,next)=>{
     const torguuli = await Torguuli.find().populate("t2.users")
     res.status(200).json({
@@ -13,7 +12,6 @@ exports.getTorguulis = asyncHandler(async(req,res,next)=>{
         data: torguuli
     })
 });
-
 exports.getTorguuli = asyncHandler(async(req,res,next)=>{
     const torguuli = await Torguuli.findById(req.params.id)
         if(!torguuli){

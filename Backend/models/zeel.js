@@ -17,15 +17,15 @@ const ZeelSchema = new mongoose.Schema({
     },
     nomawsanDate: {
         type: Date,
-        required: [true, 'Ном авсан хугацааг оруулна уу'],
+        default: Date.now
     },
-    butsaasnDate: {
+    butsaahDate: {
         type: Date,
         required: [true, 'Буцааж өгөх хугацааг оруулна уу'],
     },
     hugatsaaHetreh:{
         type: Boolean,
-        defualt: false
+        default: false
     },
 });
 

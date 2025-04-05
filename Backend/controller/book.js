@@ -7,7 +7,7 @@ const path = require('path');
 const multer = require('multer');
 //buh nom harah
 exports.getBooks = asyncHandler(async(req, res, next)=>{
-    const books = await Book.find()
+    const books = await Book.find().populate('authorId')
     res.status(200).json({
         success: true,
         count: books.length,
@@ -20,7 +20,7 @@ exports.getCategoryBooks= asyncHandler(async(req, res, next)=>{
     if(req.params.categoryIdId === '675066c09a6c150358456885')
         books = await Book.find().populate('authorId')
     else
-    books = await Book.find({categoryId: req.params.categoryIdId}).populate('authorId');
+    books = await Book.find({category: req.params.categoryId}).populate('authorId');
     res.status(200).json({
         success: true,
         count: books.length,

@@ -12,7 +12,7 @@ const BookSchema = new mongoose.Schema({
     },
     authorId: {
         type: mongoose.Schema.ObjectId,
-        ref: 'authors',
+        ref: 'Authors',
         repuired: true,
     },
     isbn: {
@@ -59,7 +59,7 @@ const BookSchema = new mongoose.Schema({
     },
     category:{
         type: mongoose.Schema.ObjectId,
-        ref: 'categories', //reference buyu zaagch torol
+        ref: 'Categories', //reference buyu zaagch torol
         required: true
     },
     createUser:{
