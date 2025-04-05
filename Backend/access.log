@@ -200,3 +200,5 @@
 ::1 - - [05/Apr/2025:08:34:19 +0000] "GET /api/lib/user/zahialga/67ecb18ff5fc37c20775227a HTTP/1.1" 200 573 "-" "PostmanRuntime/7.43.3"
 ::1 - - [05/Apr/2025:08:35:38 +0000] "GET /api/lib/category/book/67ed02403d6f7d33e37a79a1 HTTP/1.1" 200 1439 "-" "PostmanRuntime/7.43.3"
 ::1 - - [05/Apr/2025:08:37:19 +0000] "GET /api/lib/author/book/67ec01b9110967a3cd591939 HTTP/1.1" 200 791 "-" "PostmanRuntime/7.43.3"
+::1 - - [05/Apr/2025:11:25:13 +0000] "POST /api/lib/user/login HTTP/1.1" 400 89 "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
+::1 - - [05/Apr/2025:11:25:24 +0000] "POST /api/lib/user HTTP/1.1" 400 77 "http://localhost:5173/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36"
