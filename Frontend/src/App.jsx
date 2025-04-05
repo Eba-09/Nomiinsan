@@ -4,10 +4,13 @@ import './App.css';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Navbar from './Components/Navbars';
-import ImageUploader from './Components/BookCreate';
+import ImageUploader from './Components/sanch/BookCreate';
 import SanchHome from './Pages/SanchHome';
-import SanchLogin from './Components/SanchLogin';
-import UserLogin  from './Components/UserLog';
+import SanchLogin from './Components/sanch/SanchLogin';
+import UserLogin  from './Components/user/UserLog';
+import UserReg from './Components/user/UserReg';
+import SanchReg from './Components/sanch/SanchReg';
+import LibraryHome from './Pages/LibraryHome';
 function App() {
   const [search, setSearch] = useState('');
   return (
@@ -27,34 +30,18 @@ function App() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Ном хайх..."
-          className="p-2 rounded-md text-black bg-gray-300 transition-all duration-0.5 w-fit xs:w-20 md:w-30 focus:w-60 "
+          className="p-2 rounded-md text-black bg-gray-300 transition-all duration-0.5 w-full xs:w-20 md:w-30 lg:w-40 lg:focus:w-50 focus:w-30 sm:focus:w-30 md:focus:40 "
         />
       </motion.header>
-      {/* Main Content */}
-      <motion.main
-        initial={{ opacity: 0, x: -60 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6 }}
-        className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-      >
-        {['Сургалтын материал', 'Эрдэм шинжилгээ', 'Цахим ном'].map((category, index) => (
-          <motion.div
-            key={index}
-            whileHover={{ scale: 1.02 }}
-            className="bg-white p-4 mr-2 rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
-          >
-            <h2 className="text-xl font-semibold">{category}</h2>
-            <p className="text-gray-700 mt-2">Энд номын тайлбар орно.</p>
-          </motion.div>
-        ))}
-      </motion.main>
-        <div className="flex-grow">
+        <div>
           <Routes>
-            <Route path="/"/>
+            <Route path="/" element={<LibraryHome />}/>
             <Route path='/imageupload' element={<ImageUploader />} />
             <Route path='/sanchHome' element={<SanchHome />} />
             <Route path='/sanchLogin' element={<SanchLogin />} />
             <Route path='/userLogin' element={<UserLogin />} />
+            <Route path='/userReg' element={<UserReg />} />
+            <Route path='/sanchReg' element={<SanchReg />} />
           </Routes>
         </div>
       </div>

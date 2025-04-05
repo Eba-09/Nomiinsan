@@ -22,7 +22,8 @@ const UserSchema = new mongoose.Schema({
     utas: {
         type: String,
         repuired: [true, 'Хэрэглэгчийн утасны дугаарыг оруулна уу'],
-        select: false
+        select: true,
+        maxLength: [8, 'Утасны дугаар нь 8 тэмдэгт урттай байх'],
     },
     password: {
         type: String,

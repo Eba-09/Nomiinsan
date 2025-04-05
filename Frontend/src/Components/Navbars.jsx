@@ -6,13 +6,13 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <nav>
-      <div className="max-w-6xl mx-auto flex justify-between items-center">
+      <div className="max-w-6xl mx-auto flex justify-between items-center transition-all duration-100">
         {/* Large screen navigation */}
         <div className="hidden md:flex gap-6">
-          <NavLink to="/" className={({ isActive }) => isActive ? "text-blue-500 font-bold border-b-1 rounded-2xl pl-1 pr-1" : "hover:text-blue-500 text-gray-700"}>Нүүр</NavLink>
-          <NavLink to="/userLogin" className={({ isActive }) => isActive ? "text-blue-500 font-bold border-b-1 rounded-2xl pl-1 pr-1" : "hover:text-blue-500 text-gray-700"}>Ном</NavLink>
-          <NavLink to="/sanchHome" className={({ isActive }) => isActive ? "text-blue-500 font-bold border-b-1 rounded-2xl pl-1 pr-1" : "hover:text-blue-500 text-gray-700"}>Эрдэм шинжилгээ</NavLink>
-          <NavLink to="/sanchLogin"className={({ isActive }) => isActive ? "text-blue-500 font-bold border-b-1 rounded-2xl pl-1 pr-1" : "hover:text-blue-500 text-gray-700"}>Нэвтрэх</NavLink>
+          <NavLink to="/" className={({ isActive }) => isActive ? "text-blue-500 font-bold border-b-1 rounded-2xl pl-1 pr-1 shadow-sm transition-all duration-100" : "hover:text-blue-500 text-gray-700 transition-all duration-100"}>Нүүр</NavLink>
+          <NavLink to="/userReg" className={({ isActive }) => isActive ? "text-blue-500 font-bold border-b-1 rounded-2xl pl-1 pr-1 shadow-sm transition-all duration-100" : "hover:text-blue-500 text-gray-700 transition-all duration-100"}>Ном</NavLink>
+          <NavLink to="/sanchHome" className={({ isActive }) => isActive ? "text-blue-500 font-bold border-b-1 rounded-2xl pl-1 pr-1 shadow-sm transition-all duration-100" : "hover:text-blue-500 text-gray-700 transition-all duration-100"}>Эрдэм шинжилгээ</NavLink>
+          <NavLink to="/sanchReg"className={({ isActive }) => isActive ? "text-blue-500 font-bold border-b-1 rounded-2xl pl-1 pr-1 shadow-sm transition-all duration-100" : "hover:text-blue-500 text-gray-700 transition-all duration-100"}>Нэвтрэх</NavLink>
         </div>
         
         {/* Mobile menu button */}
@@ -24,10 +24,10 @@ const Navbar = () => {
       {/* Mobile dropdown menu */}
       {isOpen && (
         <div className="md:hidden flex flex-col items-start gap-2 py-1 mt-2 rounded-lg">
-          <NavLink to="/" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold" : "hover:text-blue-500"}>Нүүр</NavLink>
-          <NavLink to="/userLogin" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold" : "hover:text-blue-500"}>Ном</NavLink>
-          <NavLink to="/sanchHome" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold" : "hover:text-blue-500"}>Эрдэм шинжилгээ</NavLink>
-          <NavLink to="/sanchLogin" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold" : "hover:text-blue-500"}>Нэвтрэх</NavLink>
+          <NavLink to="/" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Нүүр</NavLink>
+          <NavLink to="/userReg" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Ном</NavLink>
+          <NavLink to="/sanchHome" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Эрдэм шинжилгээ</NavLink>
+          <NavLink to="/sanchReg" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Нэвтрэх</NavLink>
         </div>
       )}
     </nav>

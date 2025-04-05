@@ -15,7 +15,7 @@ const NomiinsanchSchema = new mongoose.Schema({
       sanchUtas: {
         type: String,
         repuired: [true, 'Номын санч утасны дугаарыг оруулна уу'],
-        select: false,
+        select: true,
         maxLength: [8, 'Утасны дугаар нь 8 тэмдэгт урттай байх'],
       },
       sanchMail: {

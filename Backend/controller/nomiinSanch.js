@@ -20,11 +20,9 @@ const createToken = (id) => {
     }
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
-
 // Register
 exports.sanchRegister = async (req, res) => {
     const { sanchFN, sanchLN, sanchUtas, sanchPassword, sanchMail } = req.body;
-
     try {
         // Email бүртгэлтэй эсэхийг шалгах
         const exists = await Sanch.findOne({ sanchMail });

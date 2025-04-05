@@ -85,10 +85,9 @@ exports.userLogin = async (req, res) => {
         if (!isMatch) {
             return res.status(400).json({ success: false, message: "Нууц үг буруу байна" });
         }
-
         // JWT Token үүсгэх
         const token = createToken(user._id);
-
+        
         res.status(200).json({ success: true, token });
         console.log("amjilttai newterlee"+ users.Fname)
     } catch (error) {
