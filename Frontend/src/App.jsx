@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from './Components/Navbars';
 import ImageUploader from './Components/sanch/BookCreate';
 import SanchHome from './Pages/SanchHome';
@@ -16,10 +16,17 @@ import UserProfile from './Components/user/UserProfile';
 import Logo from './images/logos.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { useContext } from 'react';
+import axios from 'axios';
+import { AuthContext } from './Components/AuthContext';
+import {CircleUser } from 'lucide-react'
+import { useNavigate } from 'react-router-dom';
+import CatBooks from './Components/CatBooks';
 function App() {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('')
+  const navigate = useNavigate();
+  const { token } = useContext(AuthContext);
   return (
-    <BrowserRouter>
       <div className="flex flex-col min-h-screen bg-gray-100 text-gray-900">
       {/* Header */}
       <motion.header
@@ -30,8 +37,8 @@ function App() {
       >
         <div className='flex flex-row items-center gap-1 sm:gap-5'>
         <img src={Logo} width='40px' height="20px"/>
-        <h1 className="lg:text-lg text-sm md:text-md xl:text-xl 2xl:text-xl font-bold  sm:text-sm"> Мэдээлэл зүйн тэнхимийн номын сан</h1>
-        </div>    
+        <h1 className="lg:text-lg text-sm hidden sm:block md:text-md xl:text-xl 2xl:text-xl font-bold  sm:text-sm"> Мэдээлэл зүйн тэнхимийн номын сан</h1>
+        </div>
         <Navbar />
         <div
         className='p-1 flex items-center justify-between rounded-md text-black bg-gray-300 transition-all duration-0.5 w-full xs:w-30 md:w-40 lg:w-50 '
@@ -45,7 +52,18 @@ function App() {
         />
         <FontAwesomeIcon icon={faMagnifyingGlass} className='w-8'/>
         </div>
+        {token ? (
+      <motion.div>
+          <CircleUser className='w-6 sm:w-8 md:w-10' onClick={() => navigate('userProfile')} />
+        </motion.div>
+        ) : null}
       </motion.header>
+      <motion.div
+      initial={{ opacity: 0, x: 0 }}
+      animate={{ opacity: 1, x: -30 }}
+      transition={{ duration: 0.6 }}
+      >
+      </motion.div>
         <div>
           <Routes>
             <Route path="/" element={<LibraryHome />}/>
@@ -57,10 +75,11 @@ function App() {
             <Route path='/sanchReg' element={<SanchReg />} />
             <Route path='/userHome' element={<UserHome />} />
             <Route path='/userProfile' element={<UserProfile />} />
+            <Route path='/catBooks' element={<CatBooks />} />
           </Routes>
         </div>
       </div>
-    </BrowserRouter>
+    
   );
 }
 

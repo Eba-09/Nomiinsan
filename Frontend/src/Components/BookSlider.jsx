@@ -2,9 +2,13 @@ import React, { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-function BookSlider({ title = "Popular Books", books = [] }) {
+import { useContext } from 'react';
+import { AuthContext } from './AuthContext';
+import axios from "axios";
+function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
   const scrollRef = useRef(null);
   const navigate = useNavigate();
+  const { user} = useContext(AuthContext);
   const scroll = (direction) => {
     const { current } = scrollRef;
     if (current) {
@@ -12,18 +16,43 @@ function BookSlider({ title = "Popular Books", books = [] }) {
       current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
+  const Zahialah = (nomCode) => {
+    if (user) {
+      axios
+           .post('http://localhost:8000/api/lib/zahialga', {
+                nomCode: nomCode,
+                userCode: user
+            })
+            .then((res) => {
+                if(res.data.success){
+                    alert("amjilttai zahiallaa.")
+                }
+            })
+            .catch((e) => {
+                alert("zahialga amjiltgui bolloo")
+            })
+    } else {
+      navigate("/userLogin");
+    }
+  };
+  const catBooks = () => {
+    if(catid){
+      navigate('/catBooks', {state: {catid : catid}})
+    }
+  }
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-2">
         <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
         <motion.button
         whileHover={{scale: 1.1}}
+        onClick={catBooks}
         className="text-blue-600 cursor-pointer text-sm">See More</motion.button>
       </div>
       <div className="relative">
         <button
           onClick={() => scroll("left")}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white shadow-md rounded-full hover:bg-gray-100"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white cursor-pointer shadow-md rounded-full hover:bg-gray-100"
         >
           <ChevronLeft size={20} />
         </button>
@@ -50,14 +79,14 @@ function BookSlider({ title = "Popular Books", books = [] }) {
                 <p className="text-sm text-center text-gray-800 line-clamp-1">
                     {book.authorId?.AuthorLname || "Unknown Author"}
                 </p>
-                <button className="bg-green-300 hover:bg-green-500 rounded-2xl text-sm text-center pl-1.5 pr-1.5 w-20 md:w-40 sm:w-25" onClick={() => navigate('/userLogin')}>Захиалах</button>
+                <button className="bg-green-300 hover:bg-green-500 rounded-2xl text-sm text-center pl-1.5 pr-1.5 w-20 md:w-40 sm:w-25" onClick={() => Zahialah(book._id)}>Захиалах</button>
               </div>
             </motion.div>
           ))}
         </div>
         <button
           onClick={() => scroll("right")}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white shadow-md rounded-full hover:bg-gray-100"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-white cursor-pointer shadow-md rounded-full hover:bg-gray-100"
         >
           <ChevronRight size={20} />
         </button>

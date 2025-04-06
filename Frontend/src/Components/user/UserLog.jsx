@@ -6,18 +6,21 @@ import { motion } from 'framer-motion';
 import "../../App.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressBook, faLock } from '@fortawesome/free-solid-svg-icons'
+import { useContext } from 'react';
+import { AuthContext } from '../AuthContext';
 const UserLogin = () => {
     const [oyutniCode, setoyutniCode] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
     const logSubmit = (e) => {
       e.preventDefault();
       axios.post('http://localhost:8000/api/lib/user/login', {oyutniCode, password})
         .then(result => {
           if (result.data.success) {
             alert("Амжилттай нэвтэрлээ");
-            localStorage.setItem("token", result.data.token);
-            navigate('/userProfile');
+            login(result.data.token);
+            navigate('/');
           }
         })
         .catch(err => console.log(err))
@@ -57,12 +60,3 @@ const UserLogin = () => {
   )
 }
 export default UserLogin;
-export const fetchUserProfile = async (token) => {
-  const response = await fetch(`http://localhost:8000/api/lib/user/me`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  return await response.json();
-};

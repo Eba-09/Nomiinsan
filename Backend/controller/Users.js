@@ -92,17 +92,23 @@ exports.userLogin = async (req, res) => {
     }
 };
 //1 hereglegch haruulah
-exports.getOneUser = asyncHandler(async (req, res, next) => {
-    const token = req.header("Authorization")?.split("")[1]; // "Bearer <token>"
-    if (!token) return res.status(401).json({ message: "Токен байхгүй байна" });
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded; // user._id хадгалагдана
-        next();
-    } catch (error){
-        res.status(403).json({ message: "Хүчингүй токен" });
-    }
+exports.getOneUser = (req, res) => {
+    const user = req.user;
+    res.status(200).json({
+      message: "User fetched successfully",
+      user: user,
     });
+  };
+exports.getUserdata = asyncHandler(async (req,res,next)=>{
+    const user = await User.findById(req.params.id)
+    if(!user){
+        console.log(req.params.id + 'ID tai hereglegch baihgui baina')
+    }
+    res.status(200).json({
+        success: true,
+        user: user,
+    })
+})
 //1 hereglegchin medeelel ustgah
 exports.deleteUser = asyncHandler(async (req,res,next)=>{
     const user = await User.findByIdAndDelete(req.params.id)

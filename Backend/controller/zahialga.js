@@ -13,7 +13,7 @@ exports.getZahialgas = asyncHandler(async(req,res,next)=>{
     })
 });
 exports.getZahialga = asyncHandler(async(req,res,next)=>{
-    const zahialga = await Zahialga.findById(req.params.id)
+    const zahialga = await Zahialga.findById(req.params.id).populate('nomCode')
         if(!zahialga){
             throw new Error(req.params.id + "ID tai zahialga baihgui baina",400)
         }
@@ -45,11 +45,13 @@ exports.getUserZahialga = asyncHandler(async(req,res,next)=>{
 })
 //zahialga uusgeh
 exports.createZahialga = asyncHandler(async(req,res,next)=>{
-    const user = await User.findById(req.params.userCodeId)
-    const {nomCode} = req.body;
+    const {nomCode, userCode} = req.body;
+    const user = await User.findById(userCode);
         if(!user){
-            console.log(req.params.userCodeId + 'ID tai user baihgui baina',404);
-        }
+            return res.status(404).json({
+                success: false,
+                message: `ID: ${userCode} - ном олдсонгүй`
+        })}
         nom = await Book.findById(nomCode)
         if(!nom){
             return res.status(404).json({
@@ -57,9 +59,9 @@ exports.createZahialga = asyncHandler(async(req,res,next)=>{
                 message: `ID: ${nomCode} - ном олдсонгүй`
         })}
         const zahialga = await Zahialga.create({
-            nomCode: nom._id,   // Номын ID
-            userCode: user._id,  // Хэрэглэгчийн ID
-            ...req.body      // Бусад шаардлагатай талбарууд
+            nomCode: nom._id,   
+            userCode: user._id,  
+            ...req.body
         });
     res.status(200).json({
         success: true,
