@@ -22,8 +22,13 @@ const UserLogin = () => {
             login(result.data.token);
             navigate('/');
           }
+          else{
+            alert("Нэвтрэх нэр эсвэл нууц үгээ зөв оруулна уу.")
+          }
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          alert("Нэвтрэх нэр эсвэл нууц үгээ зөв оруулна уу.")
+        })
     };
   return (
     <motion.div 

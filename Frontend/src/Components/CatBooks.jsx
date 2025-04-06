@@ -6,12 +6,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from './AuthContext';
- function CatBooks() {
+  function CatBooks() {
+  
     const location = useLocation();
     const navigate = useNavigate();
   const { catid } = location.state || {};
   const [books, setbooks] = useState([]);
-  const { user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   useEffect(() => {
     if(catid){
     axios

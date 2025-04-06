@@ -11,8 +11,7 @@ import UserLogin  from './Components/user/UserLog';
 import UserReg from './Components/user/UserReg';
 import SanchReg from './Components/sanch/SanchReg';
 import LibraryHome from './Pages/LibraryHome';
-import UserHome from './Pages/UserHome';
-import UserProfile from './Components/user/UserProfile';
+import UserProfile from './Pages/UserProfile';
 import Logo from './images/logos.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
@@ -73,7 +72,6 @@ function App() {
             <Route path='/userLogin' element={<UserLogin />} />
             <Route path='/userReg' element={<UserReg />} />
             <Route path='/sanchReg' element={<SanchReg />} />
-            <Route path='/userHome' element={<UserHome />} />
             <Route path='/userProfile' element={<UserProfile />} />
             <Route path='/catBooks' element={<CatBooks />} />
           </Routes>
