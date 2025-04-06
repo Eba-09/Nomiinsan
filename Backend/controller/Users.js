@@ -63,7 +63,6 @@ exports.userRegister = async (req, res) => {
 
 exports.userLogin = async (req, res) => {
     const { oyutniCode, password } = req.body;
-    const OyutniiCode = oyutniCode.trim().toLowerCase();
     try {
         // Хэрэв имэйл болон нууц үг хоосон байвал алдаа буцаах
         if ( !oyutniCode || !password) {
@@ -94,14 +93,15 @@ exports.userLogin = async (req, res) => {
 };
 //1 hereglegch haruulah
 exports.getOneUser = asyncHandler(async (req, res, next) => {
-    if (!req.user) {
-        res.status(404);
-        console.log("Хэрэглэгч олдсонгүй");
-      }
-      res.status(200).json({
-        success: true,
-        data: req.user, 
-      });
+    const token = req.header("Authorization")?.split("")[1]; // "Bearer <token>"
+    if (!token) return res.status(401).json({ message: "Токен байхгүй байна" });
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded; // user._id хадгалагдана
+        next();
+    } catch (error){
+        res.status(403).json({ message: "Хүчингүй токен" });
+    }
     });
 //1 hereglegchin medeelel ustgah
 exports.deleteUser = asyncHandler(async (req,res,next)=>{
