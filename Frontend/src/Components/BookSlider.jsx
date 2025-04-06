@@ -40,6 +40,11 @@ function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
       navigate('/catBooks', {state: {catid : catid}})
     }
   }
+  const OneBook = (bookid) =>{
+    if(bookid){
+      navigate('/oneBook', {state: {bookid : bookid}})
+    }
+  }
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-2">
@@ -68,6 +73,7 @@ function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
               className="min-w-[140px] bg-white rounded-2xl flex flex-col items-center hover:shadow-lg transition duration-300 flex-shrink-0"
             >
               <img
+              onClick={() => OneBook(book._id)}
                 src={`http://localhost:8000${book.photo}`}
                 alt={book.name}
                 className="w-30 h-40 object-cover bg-cover rounded-t-2xl"

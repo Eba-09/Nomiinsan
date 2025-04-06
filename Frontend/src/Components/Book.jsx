@@ -6,30 +6,25 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from './AuthContext';
-  function CatBooks() {
-    const location = useLocation();
+  function Books() {
     const navigate = useNavigate();
-  const { catid } = location.state || {};
   const [books, setbooks] = useState([]);
   const [catName, setCatname] = useState('');
   const { user } = useContext(AuthContext);
   useEffect(()=>{
-    if(catid){
       axios
-          .get(`http://localhost:8000/api/lib/category/${catid}`)
+          .get(`http://localhost:8000/api/lib/category/67f1290aec2de1c6e7523aa9`)
           .then((res)=>{
-            
             setCatname(res.data.data.name)
           })
           .catch((e)=>{
             console.log(e);
           })
-    }
-  },[catid])
+  },[])
   useEffect(() => {
-    if(catid){
+    if(catName){
     axios
-        .get(`http://localhost:8000/api/lib/category/book/${catid}`)
+        .get(`http://localhost:8000/api/lib/category/book/67f1290aec2de1c6e7523aa9`)
         .then((res) =>{
             setbooks(res.data.data);
         })
@@ -37,7 +32,7 @@ import { AuthContext } from './AuthContext';
             console.log(e)
         })
     }
-  },[catid])
+  },[catName])
   const Zahialah = (nomCode) => {
     if(user){
         axios
@@ -97,4 +92,4 @@ import { AuthContext } from './AuthContext';
     </div>
   );
 }
-export default CatBooks
+export default Books

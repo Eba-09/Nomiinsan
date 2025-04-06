@@ -21,6 +21,9 @@ import { AuthContext } from './Components/AuthContext';
 import {CircleUser } from 'lucide-react'
 import { useNavigate } from 'react-router-dom';
 import CatBooks from './Components/CatBooks';
+import OneBook from './Components/OneBook';
+import Books from './Components/Book';
+import ErdemShinj from './Components/ErdemShinj';
 function App() {
   const [search, setSearch] = useState('')
   const navigate = useNavigate();
@@ -74,6 +77,9 @@ function App() {
             <Route path='/sanchReg' element={<SanchReg />} />
             <Route path='/userProfile' element={<UserProfile />} />
             <Route path='/catBooks' element={<CatBooks />} />
+            <Route path='/oneBook' element={<OneBook />} />
+            <Route path='/Book' element={<Books />} />
+            <Route path='/erdemShinj' element={<ErdemShinj />} />
           </Routes>
         </div>
       </div>
