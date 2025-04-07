@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressBook, faLock } from '@fortawesome/free-solid-svg-icons'
 import { useContext } from 'react';
 import { AuthContext } from '../AuthContext';
+import Backimg from '../../images/library-869061_1280.jpg'
 const Login = () => {
     const [sanchMail, setEmail] = useState('');
     const [sanchPassword, setPassword] = useState('');
@@ -17,7 +18,7 @@ const Login = () => {
       e.preventDefault();
       axios.post('http://localhost:8000/api/lib/nomsanch/login', {sanchMail,sanchPassword})
         .then(result => {
-          console.log(result)
+          
           if (result.data.success) {
             alert("Амжилттай нэвтэрлээ");
             sanchLogin(result.data.token);
@@ -32,9 +33,10 @@ const Login = () => {
     initial={{opacity: 0, x:-60}}
     animate={{opacity: 1, x:0}}
     transition={{duration: 0.6}}
-    className='w-full flex flex-col justify-center items-center mt-24 font-sans'
+    className='w-full flex flex-col h-[calc(100vh-48px)] bg-cover bg-center justify-center items-center font-sans'
+    style={{ backgroundImage: `url(${Backimg})` }}
     >
-      <div className="bg-blue-100 shadow-md w-11/12 max-w-sm sm:w-80 md:w-96 text-sm sm:text-base md:text-lg pt-6 pb-6 px-4 rounded-2xl hover:shadow-lg flex flex-col gap-4 items-center justify-center">
+      <div className="bg-neutral-100 shadow-md w-11/12 max-w-sm sm:w-80 md:w-96 text-sm sm:text-base md:text-lg pt-6 pb-6 px-4 rounded-2xl hover:shadow-lg flex flex-col gap-4 items-center justify-center">
       <h4>Номын санч нэвтрэх</h4>
       <form onSubmit={logSubmit}className='flex flex-col w-fit gap-2'>
       <div className="email">

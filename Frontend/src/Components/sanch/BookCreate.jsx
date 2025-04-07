@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faAddressBook,faPhone, faStar, faCalendarDays,faSackDollar,faHouse } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../AuthContext';
@@ -28,6 +28,9 @@ const BookCreate = () => {
     const [authors, setAuthors] = useState([]);
     const [categories, setCategories] = useState([]);
     const navigate = useNavigate();
+    const [AuthorFname,setAuthorFname ] = useState('');
+    const [AuthorLname,setAuthorLname ] = useState('');
+    const [AuthorPhone,setAuthorPhone ] = useState('');
     useEffect(() => {
         axios.get('http://localhost:8000/api/lib/author')
             .then(response => setAuthors(response.data.data))
@@ -44,6 +47,24 @@ const BookCreate = () => {
           setPhoto(file); // Фото-г хадгална
       }
   };
+  const authorCreate = () =>{
+    if(AuthorFname && AuthorLname){
+        axios
+        .post('http://localhost:8000/api/lib/author', {AuthorFname, AuthorLname, AuthorPhone})
+        .then((res) => {
+            alert("Амжилттай зохиолч нэмлээ.")
+            }
+        )
+        .catch((e)=>{
+            alert("Амжилтгүй боллоо дахин оролдоно уу.")
+            console.log(e)
+        })
+    }
+    else{
+        alert("Зохиолчийн овог нэрийг оруулна уу.")
+    }
+    
+  }
   const handleSubmit = (e) => {
     if(sanch){
         e.preventDefault();
@@ -112,7 +133,12 @@ const BookCreate = () => {
               </div>
             </nav>
             </motion.div>
-            <div className="bg-white w-90 ml-2 mt-3 sm:ml-5 sm:mt-6 text-sm md:text-[14px] rounded-xl  shadow-md hover:shadow-lg transition-all duration-300">
+            <motion.div 
+              initial={{opacity: 0, x:-30}}
+              animate={{opacity: 1, x:0}}
+              transition={{duration: 0.6}}
+            className='grid grid-cols-1 sm:pl-40 md:pl-5 md:gap-3 md:grid-cols-2'>
+            <div className="bg-white w-90 ml-2 mt-3 sm:ml-5 sm:mt-6 text-sm md:text-[15px] rounded-xl  shadow-md hover:shadow-lg transition-all duration-300">
                 <h6 className='text-center font-extrabold p-2 text-l font-sans'>Шинээр ном үүсгэх</h6>
                 <form className='flex flex-col gap-1.5' onSubmit={handleSubmit}>
                     <div className="flex items-center gap-5 pl-15 ">
@@ -128,11 +154,11 @@ const BookCreate = () => {
                         <input className='outline-none' placeholder="ISBN код" type="text" value={isbn} onChange={(e) => setIsbn(e.target.value)} />
                     </div>
                     <div className="flex items-center gap-5 pl-15 ">
-                        <FontAwesomeIcon icon={faBook} />
+                    <FontAwesomeIcon icon={faStar} />
                         <input className='outline-none' placeholder="Үнэлгээ" type="text" value={rating} onChange={(e) => setRating(e.target.value)} />
                     </div>
                     <div className="flex items-center gap-5 pl-15 ">
-                        <FontAwesomeIcon icon={faBook} />
+                    <FontAwesomeIcon icon={faSackDollar} />
                         <input className='outline-none' placeholder="Үнэ" type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
                     </div>
                     <div className="flex items-center gap-5 pl-15 ">
@@ -140,7 +166,7 @@ const BookCreate = () => {
                         <input className='outline-none' placeholder="Хэл" type="text" value={hel} onChange={(e) => setHel(e.target.value)} />
                     </div>
                     <div className="flex items-center gap-5 pl-15 ">
-                        <FontAwesomeIcon icon={faBook} />
+                    <FontAwesomeIcon icon={faCalendarDays} />
                         <input className='outline-none' placeholder="Хэвлэгдсэн огноо" type="date" value={hewlesenOgnoo} onChange={(e) => setHewOgnoo(e.target.value)} />
                     </div>
                     <div className="flex items-center gap-5 pl-15 ">
@@ -152,11 +178,11 @@ const BookCreate = () => {
                         <input className='outline-none' placeholder="Номын тоо" type="number" value={too} onChange={(e) => setToo(e.target.value)} />
                     </div>
                     <div className="flex items-center gap-5 pl-15 ">
-                        <FontAwesomeIcon icon={faBook} />
+                    <FontAwesomeIcon icon={faHouse} />
                         <input className='outline-none' placeholder="Байршил" type="text" value={bairshil} onChange={(e) => setBairshil(e.target.value)} />
                     </div>
                     <div className="flex pl-15 flex-col">
-                        <p>Зохиолчид:</p>
+                        <p><FontAwesomeIcon icon={faAddressBook} /> Зохиолчид:</p>
                         <select
                     id="authorSelect"
                      className="w-50 p-2 rounded"
@@ -206,6 +232,27 @@ const BookCreate = () => {
                     </div>
                 </form>
             </div>
+            <div className='bg-white h-fit p-2 w-70 ml-2 mt-3 sm:ml-5 sm:mt-6 text-sm md:text-[14px] rounded-xl  shadow-md hover:shadow-lg transition-all duration-300'>
+            <h6 className='text-center font-extrabold p-2 text-l font-sans'>Шинээр зохиолч үүсгэх</h6>
+                <form className='flex p-2 flex-col gap-1.5' onSubmit={authorCreate}>
+                <div className="flex items-center gap-5 pl-15 ">
+                <FontAwesomeIcon icon={faAddressBook} />
+                        <input className='outline-none' placeholder="Зохиолчийн овог" type="text" value={AuthorFname} onChange={(e) => setAuthorFname(e.target.value)} />
+                    </div>
+                    <div className="flex items-center gap-5 pl-15 ">
+                    <FontAwesomeIcon icon={faAddressBook} />
+                        <input className='outline-none' placeholder="Зохиолчийн Нэр" type="text" value={AuthorLname} onChange={(e) => setAuthorLname(e.target.value)} />
+                    </div>
+                    <div className="flex items-center gap-5 pl-15 ">
+                    <FontAwesomeIcon icon={faPhone} />
+                        <input className='outline-none' placeholder="Утасны дугаар" type="text" value={AuthorPhone} onChange={(e) => setAuthorPhone(e.target.value)} />
+                    </div>
+                    <div className="button flex justify-center p-1.5">
+                    <button type='submit' className='bg-green-400 hover:bg-green-500 rounded-2xl text-center pl-1.5 pr-1.5 max-w-32 w-full'>Үүсгэх</button>
+                    </div>
+                </form>
+            </div>
+            </motion.div>
         </div>
     );
 };

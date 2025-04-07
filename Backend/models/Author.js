@@ -10,7 +10,7 @@ const AuthorSchema = new mongoose.Schema({
     },
     AuthorPhone: {
         type: Number,
-        required: [true, 'Зохиолчийн утасны дугаарыг оруулна уу'],
+        required: [false, 'Зохиолчийн утасны дугаарыг оруулна уу'],
         
     },
 })

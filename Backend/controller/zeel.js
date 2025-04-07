@@ -47,12 +47,12 @@ exports.getSanchZeels = asyncHandler(async(req,res,next)=>{
 });
 //zeel uusgeh
 exports.createZeel = asyncHandler(async(req,res,next)=>{
-    const { nomCode, userCode, sanchCode } = req.body
+    const { nomCode, userCode, sanchCode, butsaahDate } = req.body
         if(!userCode){
-            throw new Error(req.params.userCodeId + 'ID tai user baihgui baina',404);
+            console.log(req.params.userCodeId + 'ID tai user baihgui baina',404);
         }
         if(!sanchCode){
-            throw new Error(req.params.userCodeId + 'ID tai sanch baihgui baina',404);
+            console.log(req.params.sanchCodeId + 'ID tai sanch baihgui baina',404);
         }
     const zeel = await Zeel.create(req.body)
     res.status(200).json({
