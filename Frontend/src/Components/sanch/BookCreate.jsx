@@ -3,8 +3,14 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-
+import { useContext } from 'react';
+import { AuthContext } from '../AuthContext';
+import { motion } from 'framer-motion';
+import { NavLink } from 'react-router-dom';
+import Badge from '@mui/material/Badge';
+import MailIcon from '@mui/icons-material/Mail';
 const BookCreate = () => {
+    const {sanch } = useContext(AuthContext);
     const [name, setName] = useState('');
     const [photo, setPhoto] = useState('');
     const [authorId, setAuthorId] = useState('');
@@ -39,7 +45,9 @@ const BookCreate = () => {
       }
   };
   const handleSubmit = (e) => {
-    e.preventDefault();
+    if(sanch){
+        e.preventDefault();
+    setCreateUser(sanch);
     const formData = new FormData();
     formData.append("name", name);
     formData.append("photo", photo); // Зураг оруулах
@@ -64,55 +72,90 @@ const BookCreate = () => {
     .then((response) => {
         console.log("Success:", response.data);
         alert("Ном амжилттай үүслээ");
+        setName('');
+  setPhoto('');
+  setAuthorId('');
+  setIsbn('');
+  setRating('');
+  setPrice('');
+  setHel('');
+  setHewOgnoo('');
+  setToo('');
+  setHuudas('');
+  setAvailable('');
+  setCategory('');
+  setBairshil('');
     })
     .catch((error) => {
         console.error("Error:", error);
-    });};  
+    });}; 
+    }
+     
     return (
-        <div className='min-h-full w-fit bg-gray-100 text-gray-900 p-8'>
-            <div className="bg-white p-2 mr-2 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                <form onSubmit={handleSubmit}>
-                    <div className="book-input">
+        <div>
+        <motion.div 
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        transition={{duration: 0.6}}
+        className='min-h-fit border-t-2 rounded-xl border-gray-300  md:w-full sm:w-full bg-white items-center sm:gap-30 md:gap-35 lg:gap-60 gap-3 text-gray-900 p-1 flex justify-center'
+        >
+        <nav>
+              <div className="max-w-6xl gap-4 mx-auto flex justify-between items-center transition-all duration-100">
+                <div className="flex gap-2 sm:gap-8 md:gap-15 lg:gap-25 p-2 text-sm sm:text-xl">
+                  <NavLink to='/createBook' className="text-blue-500 rounded-2xl pl-1 pr-1  transition-all duration-100"
+                  >Ном үүсгэх</NavLink>
+                <NavLink to='/zahialga' className=" text-gray-900 rounded-2xl pl-1 pr-1  transition-all duration-100"
+                >Захиалга</NavLink>
+                  <NavLink to='/zeel' className="text-gray-900   rounded-2xl pl-1 pr-1  transition-all duration-100">
+                  Гэрээр олгосон ном</NavLink>
+                </div>
+              </div>
+            </nav>
+            </motion.div>
+            <div className="bg-white w-90 ml-2 mt-3 sm:ml-5 sm:mt-6 text-sm md:text-[14px] rounded-xl  shadow-md hover:shadow-lg transition-all duration-300">
+                <h6 className='text-center font-extrabold p-2 text-l font-sans'>Шинээр ном үүсгэх</h6>
+                <form className='flex flex-col gap-1.5' onSubmit={handleSubmit}>
+                    <div className="flex items-center gap-5 pl-15 ">
                         <FontAwesomeIcon icon={faBook} />
-                        <input placeholder="Номын нэр" type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                        <input className='outline-none' placeholder="Номын нэр" type="text" value={name} onChange={(e) => setName(e.target.value)} />
                     </div>
-          <div className="book-input">
+          <div className="flex items-center gap-5 pl-15 ">
             <FontAwesomeIcon icon={faBook} />
-            <input type="file" accept="image/*" onChange={(e) => handleFileChange(e)} />
+            <input className='outline-none' type="file" accept="image/*" onChange={(e) => handleFileChange(e)} />
           </div>
-                    <div className="book-input">
+                    <div className="flex items-center gap-5 pl-15 ">
                         <FontAwesomeIcon icon={faBook} />
-                        <input placeholder="ISBN код" type="text" value={isbn} onChange={(e) => setIsbn(e.target.value)} />
+                        <input className='outline-none' placeholder="ISBN код" type="text" value={isbn} onChange={(e) => setIsbn(e.target.value)} />
                     </div>
-                    <div className="book-input">
+                    <div className="flex items-center gap-5 pl-15 ">
                         <FontAwesomeIcon icon={faBook} />
-                        <input placeholder="Үнэлгээ" type="text" value={rating} onChange={(e) => setRating(e.target.value)} />
+                        <input className='outline-none' placeholder="Үнэлгээ" type="text" value={rating} onChange={(e) => setRating(e.target.value)} />
                     </div>
-                    <div className="book-input">
+                    <div className="flex items-center gap-5 pl-15 ">
                         <FontAwesomeIcon icon={faBook} />
-                        <input placeholder="Үнэ" type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
+                        <input className='outline-none' placeholder="Үнэ" type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
                     </div>
-                    <div className="book-input">
+                    <div className="flex items-center gap-5 pl-15 ">
                         <FontAwesomeIcon icon={faBook} />
-                        <input placeholder="Хэл" type="text" value={hel} onChange={(e) => setHel(e.target.value)} />
+                        <input className='outline-none' placeholder="Хэл" type="text" value={hel} onChange={(e) => setHel(e.target.value)} />
                     </div>
-                    <div className="book-input">
+                    <div className="flex items-center gap-5 pl-15 ">
                         <FontAwesomeIcon icon={faBook} />
-                        <input placeholder="Хэвлэгдсэн огноо" type="date" value={hewlesenOgnoo} onChange={(e) => setHewOgnoo(e.target.value)} />
+                        <input className='outline-none' placeholder="Хэвлэгдсэн огноо" type="date" value={hewlesenOgnoo} onChange={(e) => setHewOgnoo(e.target.value)} />
                     </div>
-                    <div className="book-input">
+                    <div className="flex items-center gap-5 pl-15 ">
                         <FontAwesomeIcon icon={faBook} />
-                        <input placeholder="Хуудасны тоо" type="number" value={huudas} onChange={(e) => setHuudas(e.target.value)} />
+                        <input className='outline-none' placeholder="Хуудасны тоо" type="number" value={huudas} onChange={(e) => setHuudas(e.target.value)} />
                     </div>
-                    <div className="book-input">
+                    <div className="flex items-center gap-5 pl-15 ">
                         <FontAwesomeIcon icon={faBook} />
-                        <input placeholder="Номын тоо" type="number" value={too} onChange={(e) => setToo(e.target.value)} />
+                        <input className='outline-none' placeholder="Номын тоо" type="number" value={too} onChange={(e) => setToo(e.target.value)} />
                     </div>
-                    <div className="book-input">
+                    <div className="flex items-center gap-5 pl-15 ">
                         <FontAwesomeIcon icon={faBook} />
-                        <input placeholder="Байршил" type="text" value={bairshil} onChange={(e) => setBairshil(e.target.value)} />
+                        <input className='outline-none' placeholder="Байршил" type="text" value={bairshil} onChange={(e) => setBairshil(e.target.value)} />
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex pl-15 flex-col">
                         <p>Зохиолчид:</p>
                         <select
                     id="authorSelect"
@@ -128,7 +171,7 @@ const BookCreate = () => {
                      ))}
             </select>
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex pl-15 flex-col">
                         <p>Категориуд:</p>
         <select
                     id="categorySelect"
@@ -144,16 +187,22 @@ const BookCreate = () => {
                      ))}
             </select>
                     </div>
-                    <div className="book-input">
-                        <FontAwesomeIcon icon={faBook} />
-                        <input placeholder="Үүсгэсэн хэрэглэгч" type="text" value={createUser} onChange={(e) => setCreateUser(e.target.value)} />
-                    </div>
-                    <div className="book-input">
-                        <FontAwesomeIcon icon={faBook} />
-                        <input placeholder="төрөл" type="text" value={available} onChange={(e) => setAvailable(e.target.value)} />
-                    </div>
-                    <div className="button">
-                        <button type="submit">Үүсгэх</button>
+                    <div className="flex pl-15 flex-col">
+              <p>Төрөл:</p>
+              <select
+                id="typeSelect"
+                className="w-50 p-2 rounded"
+                value={available}
+                onChange={(e) => setAvailable(e.target.value)}
+              >
+                <option value="">-- Сонгох --</option>
+                <option value="new">new</option>
+                <option value="old">old</option>
+                <option value="ашиглахгүй">ашиглахгүй</option>
+              </select>
+            </div>              
+            <div className="button flex justify-center p-1.5">
+                    <button type='submit' className='bg-green-400 hover:bg-green-500 rounded-2xl text-center pl-1.5 pr-1.5 max-w-32 w-full'>Үүсгэх</button>
                     </div>
                 </form>
             </div>

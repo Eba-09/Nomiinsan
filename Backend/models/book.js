@@ -23,7 +23,7 @@ const BookSchema = new mongoose.Schema({
     rating: {
         type: Number,
         min: [1, 'Рэйтинг хамгийн багадаа 1 байх ёстой'], 
-        max: [5, 'Рэйтинг хамгийн ихдээ 10 байх ёстой'], 
+        max: [5, 'Рэйтинг хамгийн ихдээ 5 байх ёстой'], 
     },
     price:{
         type: Number,
@@ -50,7 +50,7 @@ const BookSchema = new mongoose.Schema({
         type: Number,
         max: [700, 'Ном дээд талдаа 700 хуудастай байх.'], 
     },
-    available:['new','old', 'kindle', 'pdf'],
+    available:['new','old', 'ашиглахгүй'],
     bairshil: {
         type: String,
         required: [true, "Номын байршилыг оруулна уу"],

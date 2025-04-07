@@ -4,7 +4,7 @@ import './App.css';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Navbar from './Components/Navbars';
-import ImageUploader from './Components/sanch/BookCreate';
+import CreateBook from './Components/sanch/BookCreate';
 import SanchHome from './Pages/SanchHome';
 import SanchLogin from './Components/sanch/SanchLogin';
 import UserLogin  from './Components/user/UserLog';
@@ -16,7 +16,6 @@ import Logo from './images/logos.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { useContext } from 'react';
-import axios from 'axios';
 import { AuthContext } from './Components/AuthContext';
 import {CircleUser } from 'lucide-react'
 import { useNavigate } from 'react-router-dom';
@@ -24,6 +23,8 @@ import CatBooks from './Components/CatBooks';
 import OneBook from './Components/OneBook';
 import Books from './Components/Book';
 import ErdemShinj from './Components/ErdemShinj';
+import SanchZeel from './Components/sanch/SanchZeels';
+import SanchZahialga from './Components/sanch/SanchZahialgas';
 function App() {
   const [search, setSearch] = useState('')
   const navigate = useNavigate();
@@ -69,7 +70,7 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<LibraryHome />}/>
-            <Route path='/imageupload' element={<ImageUploader />} />
+            <Route path='/createBook' element={<CreateBook />} />
             <Route path='/sanchHome' element={<SanchHome />} />
             <Route path='/sanchLogin' element={<SanchLogin />} />
             <Route path='/userLogin' element={<UserLogin />} />
@@ -80,6 +81,8 @@ function App() {
             <Route path='/oneBook' element={<OneBook />} />
             <Route path='/Book' element={<Books />} />
             <Route path='/erdemShinj' element={<ErdemShinj />} />
+            <Route path='/zeel' element={<SanchZeel />} />
+            <Route path='/zahialga' element={<SanchZahialga />} />
           </Routes>
         </div>
       </div>

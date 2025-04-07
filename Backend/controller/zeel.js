@@ -5,7 +5,7 @@ const User = require("../models/user");
 const Sanch = require("../models/nomiinsanch");
 const Zahialga = require("../models/zahialga");
 exports.getZeels = asyncHandler(async(req,res,next)=>{
-    const zeels = await Zeel.find().populate("userCode")
+    const zeels = await Zeel.find().populate("userCode").populate("nomCode").populate("sanchCode")
     res.status(200).json({
         success: true,
         count: zeels.length,

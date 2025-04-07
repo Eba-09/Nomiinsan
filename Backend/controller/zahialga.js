@@ -3,7 +3,6 @@ const Error = require("../middleware/error");
 const asyncHandler = require("../middleware/asyncHandler");
 const User = require("../models/user");
 const Book = require("../models/book");
-
 exports.getZahialgas = asyncHandler(async(req,res,next)=>{
     const zahialgas = await Zahialga.find().populate("userCode").populate("nomCode")
     res.status(200).json({
@@ -31,7 +30,7 @@ exports.getUserZahialgud = asyncHandler(async(req,res,next)=>{
         data: zahialgas
     })
 });
-//tuhain 1 userin zahialgud
+//tuhain 1 userin zahialguud
 exports.getUserZahialga = asyncHandler(async(req,res,next)=>{
     const zahialga = await Zahialga.find({userCode: req.params.userCodeId}).populate("nomCode")
         if(!zahialga){

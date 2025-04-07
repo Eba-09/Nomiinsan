@@ -6,11 +6,13 @@ import { motion } from 'framer-motion';
 import "../../App.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressBook, faLock } from '@fortawesome/free-solid-svg-icons'
+import { useContext } from 'react';
+import { AuthContext } from '../AuthContext';
 const Login = () => {
     const [sanchMail, setEmail] = useState('');
     const [sanchPassword, setPassword] = useState('');
-    const [userdata, setuserdata] = useState('');
     const navigate = useNavigate();
+    const { sanchLogin } = useContext(AuthContext);
     const logSubmit = (e) => {
       e.preventDefault();
       axios.post('http://localhost:8000/api/lib/nomsanch/login', {sanchMail,sanchPassword})
@@ -18,7 +20,8 @@ const Login = () => {
           console.log(result)
           if (result.data.success) {
             alert("Амжилттай нэвтэрлээ");
-            navigate('/sanchHome', {state: {userdata : sanchMail}})
+            sanchLogin(result.data.token);
+            navigate('/sanchHome')
           }
         })
         .catch(err => console.log(err))

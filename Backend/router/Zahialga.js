@@ -5,6 +5,4 @@ const router = express.Router();
 router.route('/').get(getZahialgas).post(createZahialga);
 router.route('/user').get(getUserZahialgud);
 router.route('/:id').get(getZahialga).delete(deleteZahialga).put(updateZahialga);
-
-
 module.exports = router

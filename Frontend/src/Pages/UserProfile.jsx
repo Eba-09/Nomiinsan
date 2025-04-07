@@ -52,7 +52,7 @@ const [userData, setuserData] = useState([]);
     }, [user]);
   return(
     <div>
-      <motion.div className="min-h-full w-full border-t-2 rounded-xl border-gray-300  md:w-full sm:w-full bg-white items-center sm:gap-30 md:gap-35 lg:gap-60 gap-3 text-gray-900 p-1 flex justify-end">
+      <motion.div className="min-h-full w-full border-t-2 rounded-xl border-gray-300  md:w-full sm:w-full bg-white items-center sm:gap-30 md:gap-35 lg:gap- gap-3 text-gray-900 p-1 flex justify-end">
         <nav>
               <div className="max-w-6xl gap-4 mx-auto flex justify-between items-center transition-all duration-100">
                 <div className="flex gap-2 sm:gap-8 md:gap-15 lg:gap-25 text-sm sm:text-xl">

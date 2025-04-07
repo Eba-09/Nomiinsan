@@ -91,7 +91,6 @@ exports.sanchLogin = async (req, res) => {
         res.status(500).json({ success: false, message: "Серверийн алдаа гарлаа" });
     }
 };
-
 //1sanch haruulah
 exports.getSanch = asyncHandler(async(req,res,next)=>{
     const sanch = await Sanch.findById(req.params.id)
@@ -103,6 +102,13 @@ exports.getSanch = asyncHandler(async(req,res,next)=>{
         data: sanch,
     })
 })
+exports.getOneSanch = (req, res) => {
+    const user = req.user;
+    res.status(200).json({
+      message: "User fetched successfully",
+      user: user,
+    });
+  };
 
 
 //sanch ustgah

@@ -27,6 +27,10 @@ const ZeelSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    ugsun:{
+        type: Boolean,
+        default: false
+    },
 });
 
 module.exports = mongoose.model('Zeels', ZeelSchema)

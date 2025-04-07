@@ -7,11 +7,13 @@ import { useContext } from 'react';
 import { AuthContext } from './AuthContext';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { token, logout } = useContext(AuthContext);
+  const { token, logout, sanchToken, sanchlogout} = useContext(AuthContext);
   const navigate = useNavigate();
  const handleLogout = () =>{
   localStorage.removeItem("token");
+  localStorage.removeItem("sanchToken");
   logout();
+  sanchlogout();
   navigate('/');
   }
   return (
@@ -22,7 +24,20 @@ const Navbar = () => {
           <NavLink to="/" className={({ isActive }) => isActive ? "text-blue-500 font-bold lg:border-b-1 rounded-2xl md:shadow-none  pl-1 pr-1  transition-all duration-100" : "hover:text-blue-500 text-gray-700 transition-all duration-100"}>Нүүр</NavLink>
           <NavLink to="/Book" className={({ isActive }) => isActive ? "text-blue-500 font-bold lg:border-b-1 md:shadow-none  rounded-2xl pl-1 pr-1  transition-all duration-100" : "hover:text-blue-500 text-gray-700 transition-all duration-100"}>Ном</NavLink>
           <NavLink to="/erdemShinj" className={({ isActive }) => isActive ? "text-blue-500 font-bold lg:border-b-1 md:shadow-none  rounded-2xl pl-1 pr-1  transition-all duration-100" : "hover:text-blue-500 text-gray-700 transition-all duration-100"}>Эрдэм шинжилгээ</NavLink>
-          {token ? (
+          {sanchToken ? (
+        <NavLink
+        to="/sanchHome"
+        className={({ isActive }) =>
+          isActive
+            ? "text-blue-500 font-bold md:lg:border-b-1 md:shadow-none rounded-2xl pl-1 pr-1  transition-all duration-100"
+            : "hover:text-blue-500 text-gray-700 transition-all duration-100"
+        }
+      >
+        Номын санч
+      </NavLink>
+      ) : null
+      }
+          {token || sanchToken ? (
         <button
           onClick={handleLogout}
           className="hover:text-blue-500 text-gray-700 transition-all duration-100"
@@ -41,6 +56,7 @@ const Navbar = () => {
           Нэвтрэх
         </NavLink>
       )}
+      
         </div>
         {/* Mobile menu button */}
         <button className="md:hidden ml-2" onClick={() => setIsOpen(!isOpen)}>
@@ -54,7 +70,20 @@ const Navbar = () => {
           <NavLink to="/Book" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Ном</NavLink>
           <NavLink to="/erdemShinj" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Эрдэм шинжилгээ</NavLink>
           <NavLink to="/sanchLogin" onClick={() => setIsOpen(false)} className={({ isActive }) => isActive ? "text-blue-500 font-bold transition-all duration-100" : "hover:text-blue-500"}>Дифлом</NavLink>
-          {token ? (
+          {sanchToken ? (
+        <NavLink
+        to="/sanchHome"
+        className={({ isActive }) =>
+          isActive
+            ? "text-blue-500 font-bold md:lg:border-b-1 md:shadow-none rounded-2xl pl-1 pr-1  transition-all duration-100"
+            : "hover:text-blue-500 transition-all duration-100"
+        }
+      >
+        Номын санч
+      </NavLink>
+      ) : null
+      }
+          {token || sanchToken ? (
         <button
           onClick={handleLogout}
           className="hover:text-blue-500 text-blue-500 transition-all duration-100"
@@ -71,6 +100,7 @@ const Navbar = () => {
           Нэвтрэх
         </NavLink>
       )}
+      
         </div>
       )}
     </nav>
