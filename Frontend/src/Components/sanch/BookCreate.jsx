@@ -47,24 +47,28 @@ const BookCreate = () => {
           setPhoto(file); // Фото-г хадгална
       }
   };
-  const authorCreate = () =>{
-    if(AuthorFname && AuthorLname){
-        axios
-        .post('https://library-kjji.onrender.com/api/lib/author', {AuthorFname, AuthorLname, AuthorPhone})
-        .then((res) => {
-            alert("Амжилттай зохиолч нэмлээ.")
-            }
-        )
-        .catch((e)=>{
-            alert("Амжилтгүй боллоо дахин оролдоно уу.")
-            console.log(e)
-        })
+  const authorCreate = (e) => {
+    e.preventDefault();  // Prevents the default form submission behavior
+    if (AuthorLname && AuthorFname) {
+        axios.post('https://library-kjji.onrender.com/api/lib/author', { AuthorFname, AuthorLname, AuthorPhone })
+            .then((res) => {
+                alert("Амжилттай зохиолч нэмлээ.");
+                // Clear form fields after successful submit
+                setAuthorFname('');
+                setAuthorLname('');
+                setAuthorPhone('');
+            })
+            .catch((e) => {
+                alert("Амжилтгүй боллоо дахин оролдоно уу.");
+                console.log(e);
+            });
+    } else {
+        alert("Зохиолчийн овог нэрийг оруулна уу.");
     }
-    else{
-        alert("Зохиолчийн овог нэрийг оруулна уу.")
-    }
-    
-  }
+};
+
+
+
   const handleSubmit = (e) => {
     if(sanch){
         e.preventDefault();
