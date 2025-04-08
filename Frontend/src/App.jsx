@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Navbar from './Components/Navbars';
 import CreateBook from './Components/sanch/BookCreate';
@@ -18,6 +18,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { useContext } from 'react';
 import { AuthContext } from './Components/AuthContext';
 import {CircleUser } from 'lucide-react'
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import CatBooks from './Components/CatBooks';
 import OneBook from './Components/OneBook';
@@ -25,10 +26,47 @@ import Books from './Components/Book';
 import ErdemShinj from './Components/ErdemShinj';
 import SanchZeel from './Components/sanch/SanchZeels';
 import SanchZahialga from './Components/sanch/SanchZahialgas';
+
 function App() {
-  const [search, setSearch] = useState('')
   const navigate = useNavigate();
   const { token } = useContext(AuthContext);
+  const [search, setSearch] = useState('');
+  const [books, setBooks] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:8000/api/lib/book') // Энд API замаа тохируул
+      .then((res) => setBooks(res.data.data))
+      .catch((err) => console.error('Ном татахад алдаа:', err));
+  }, []);
+  useEffect(() => {
+    if (search.trim() === '') {
+      setFiltered([]);
+    } else {
+      const result = books.filter((book) =>
+        book.name.toLowerCase().includes(search.toLowerCase())
+      );
+      setFiltered(result);
+    }
+  }, [search, books]);
+  const highlightMatch = (text, query) => {
+    if (!query) return text;
+    const regex = new RegExp(`(${query})`, 'gi');
+    const parts = text.split(regex);
+    return parts.map((part, i) =>
+      part.toLowerCase() === query.toLowerCase() ? (
+        <span key={i} className="text-black font-bold">
+          {part}
+        </span>
+      ) : (
+        <span key={i}>{part}</span>
+      )
+    );
+  };
+  const SelectBook = (bookid) => {
+    if(bookid){
+      navigate('/oneBook', {state: {bookid : bookid}})
+    }
+  }
   return (
       <div className="flex flex-col min-h-screen bg-gray-100 text-gray-900">
       {/* Header */}
@@ -55,6 +93,29 @@ function App() {
         />
         <FontAwesomeIcon icon={faMagnifyingGlass} className='w-8'/>
         </div>
+      <AnimatePresence>
+        {filtered.length > 0 && (
+          <motion.ul
+            initial={{ opacity: 0, y: -5 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -5 }}
+            className="absolute z-50 bg-white w-full sm:w-70 md:w-80 right-0 mt-40 border rounded-md shadow-md max-h-60 overflow-y-auto"
+          >
+            {filtered.map((book) => (
+              <motion.li
+                key={book._id}
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => SelectBook(book._id)}
+              >
+                {highlightMatch(book.name, search)}
+              </motion.li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
         {token ? (
       <motion.div>
           <CircleUser className='w-6 sm:w-8 md:w-10' onClick={() => navigate('userProfile')} />

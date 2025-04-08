@@ -107,7 +107,7 @@ exports.updateBook = asyncHandler(async(req,res,next)=>{
 })
 //1nom ustgah 
 exports.deleteBook = asyncHandler(async(req,res,next)=>{
-    const book = await Book.findById(req.params.id)
+    const book = await Book.findByIdAndDelete(req.params.id)
         if(!book){
             throw new Error(req.params.id + 'ID tai nom baihgui baina',400)
         }
@@ -116,3 +116,4 @@ exports.deleteBook = asyncHandler(async(req,res,next)=>{
             data: book
         })
 })
+

@@ -8,7 +8,7 @@ import axios from "axios";
 function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
   const scrollRef = useRef(null);
   const navigate = useNavigate();
-  const { user} = useContext(AuthContext);
+  const { user,sanch} = useContext(AuthContext);
   const scroll = (direction) => {
     const { current } = scrollRef;
     if (current) {
@@ -44,6 +44,17 @@ function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
     if(bookid){
       navigate('/oneBook', {state: {bookid : bookid}})
     }
+  }
+  const BookDelete = (book) =>{
+    axios
+        .delete(`http://localhost:8000/api/lib/book/${book}`)
+        .then((res)=>{
+          alert("Амжилттай ном устлаа");
+        })
+        .catch((e)=>{
+          console.log(e);
+          alert("Ном устгах амжилтгүй боллоо")
+        })
   }
   return (
     <div className="w-full">
@@ -85,7 +96,12 @@ function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
                 <p className="text-sm text-center text-gray-800 line-clamp-1">
                     {book.authorId?.AuthorLname || "Unknown Author"}
                 </p>
-                <button className="bg-green-300 hover:bg-green-500 rounded-2xl text-sm text-center pl-1.5 pr-1.5 w-20 md:w-40 sm:w-25" onClick={() => Zahialah(book._id)}>Захиалах</button>
+                { sanch ? (<button className="bg-green-300 hover:bg-green-500
+                 rounded-2xl text-sm text-center pl-1.5 pr-1.5 w-20 md:w-40 sm:w-25"
+                  onClick={() => BookDelete(book._id)}>Устгах</button>)
+                   : (<button className="bg-green-300 hover:bg-green-500 rounded-2xl text-sm
+                     text-center pl-1.5 pr-1.5 w-20 md:w-40 sm:w-25" onClick={() => Zahialah(book._id)}>Захиалах</button>)
+                   }
               </div>
             </motion.div>
           ))}
