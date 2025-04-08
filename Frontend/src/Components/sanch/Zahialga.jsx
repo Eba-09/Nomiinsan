@@ -20,7 +20,7 @@ const Zahialga = () => {
   useEffect(() => {
     if (sanch) {
       axios
-        .get(`http://localhost:8000/api/lib/zahialga`)
+        .get(`https://library-kjji.onrender.com/api/lib/zahialga`)
         .then((res) => {
           const zahialguud = res.data.data.map((zahialga, index) => ({
             id: zahialga._id,
@@ -77,7 +77,7 @@ const Zahialga = () => {
     };
   
     axios
-      .post(`http://localhost:8000/api/lib/zeel`, payload)
+      .post(`https://library-kjji.onrender.com/api/lib/zeel`, payload)
       .then(() => {
         alert('Амжилттай зээл үүслээ.');
         setIsZeelModalOpen(false);
@@ -88,7 +88,7 @@ const Zahialga = () => {
   };  
   const handleSave = () => {
     axios
-      .put(`http://localhost:8000/api/lib/zahialga/${selectedId}`, {tuluw : status })
+      .put(`https://library-kjji.onrender.com/api/lib/zahialga/${selectedId}`, {tuluw : status })
       .then(() => {
         setIsModalOpen(false);
         alert('Захиалгын төлөв амжилттай өөрчлөгдлөө');

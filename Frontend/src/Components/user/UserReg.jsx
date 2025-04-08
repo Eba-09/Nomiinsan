@@ -17,7 +17,7 @@ const UserReg = () => {
   const UserSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:8000/api/lib/user', {
+      .post('https://library-kjji.onrender.com/api/lib/user', {
         Fname, Lname, oyutniCode,email, utas, password
       })
       .then(result =>{ 

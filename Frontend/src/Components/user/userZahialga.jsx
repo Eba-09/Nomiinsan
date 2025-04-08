@@ -8,7 +8,7 @@ const UserZahialga = ({ user }) => {
   useEffect(() => {
     if (user) {
       axios
-        .get(`http://localhost:8000/api/lib/user/zahialga/${user}`)
+        .get(`https://library-kjji.onrender.com/api/lib/user/zahialga/${user}`)
         .then((res) => {
           const zahialguud = res.data.data.map((zahialga, index) => ({
             id: zahialga._id,

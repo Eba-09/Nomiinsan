@@ -13,7 +13,7 @@ import { AuthContext } from './AuthContext';
   const { user } = useContext(AuthContext);
   useEffect(()=>{
       axios
-          .get(`http://localhost:8000/api/lib/category/67f127fcef65b6ac6fad4f46`)
+          .get(`https://library-kjji.onrender.com/api/lib/category/67f127fcef65b6ac6fad4f46`)
           .then((res)=>{
             setCatname(res.data.data.name)
           })
@@ -24,7 +24,7 @@ import { AuthContext } from './AuthContext';
   useEffect(() => {
     if(catName){
     axios
-        .get(`http://localhost:8000/api/lib/category/book/67f127fcef65b6ac6fad4f46`)
+        .get(`https://library-kjji.onrender.com/api/lib/category/book/67f127fcef65b6ac6fad4f46`)
         .then((res) =>{
             setbooks(res.data.data);
         })
@@ -36,7 +36,7 @@ import { AuthContext } from './AuthContext';
   const Zahialah = (nomCode) => {
     if(user){
         axios
-             .post('http://localhost:8000/api/lib/zahialga', {
+             .post('https://library-kjji.onrender.com/api/lib/zahialga', {
                 nomCode: nomCode,
                 userCode: user
             })
@@ -62,7 +62,7 @@ import { AuthContext } from './AuthContext';
     return books.map((book) => (
       <div key={book._id} className="min-w-[140px] bg-white rounded-2xl flex flex-col items-center hover:shadow-lg transition duration-300 flex-shrink-0">
         <img onClick={() => OneBook(book._id)}
-        src={`http://localhost:8000${book.photo}`}
+        src={`https://library-kjji.onrender.com${book.photo}`}
             alt={book.name}
             className="w-30 h-40 object-cover p-1 bg-cover rounded-t-2xl"
           />

@@ -9,11 +9,11 @@ const OneBook = () => {
     const location = useLocation();
     const [bookdata, setbookdata] = useState([]);
     const { bookid } = location.state || {};
-    const {user} = useContext(AuthContext);
+    const {user, sanch} = useContext(AuthContext);
     useEffect(()=>{
         if(bookid){
             axios
-                .get(`http://localhost:8000/api/lib/book/${bookid}`)
+                .get(`https://library-kjji.onrender.com/api/lib/book/${bookid}`)
                 .then((res)=>{
                     setbookdata(res.data.data)
                 })
@@ -25,7 +25,7 @@ const OneBook = () => {
     const Zahialah = (nomCode) => {
         if(user){
             axios
-                 .post('http://localhost:8000/api/lib/zahialga', {
+                 .post('https://library-kjji.onrender.com/api/lib/zahialga', {
                     nomCode: nomCode,
                     userCode: user
                 })
@@ -42,6 +42,17 @@ const OneBook = () => {
             navigate('/userLogin')
         }
       }
+      const BookDelete = (book) =>{
+          axios
+              .delete(`https://library-kjji.onrender.com/api/lib/book/${book}`)
+              .then((res)=>{
+                alert("Амжилттай ном устлаа");
+              })
+              .catch((e)=>{
+                console.log(e);
+                alert("Ном устгах амжилтгүй боллоо")
+              })
+        }
     const renderBook = () => {
         if (!bookdata) return <p>Уншиж байна...</p>;
       
@@ -50,7 +61,7 @@ const OneBook = () => {
             <div className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0">
               <motion.img
               whileHover={{scale: 1.02}}
-                src={`http://localhost:8000${bookdata.photo}`}
+                src={`https://library-kjji.onrender.com${bookdata.photo}`}
                 alt={bookdata.name}
                 className="w-[300px] h-[420px] object-cover hover:shadow-2xl rounded-2xl shadow-lg"
               />
@@ -71,13 +82,16 @@ const OneBook = () => {
                 {"★".repeat(bookdata.rating)}{"☆".repeat(5 - bookdata.rating)}
                 <span className="text-gray-600 text-center sm:text-2xl text-base">({bookdata.rating})</span>
               </div>
-      
-              <button
-                onClick={() => Zahialah(bookdata._id)}
-                className="mt-4 bg-green-500 hover:bg-green-600 text-white py-3 px-6 text-lg rounded-xl font-semibold transition"
-              >
-                Захиалах
-              </button>
+              { sanch ? (<button className="bmt-4 bg-green-500 hover:bg-green-600 text-white py-3 px-6 text-lg rounded-xl font-semibold transition"
+                  onClick={() => BookDelete(book._id)}>Устгах</button>)
+                   : (<button
+                    onClick={() => Zahialah(bookdata._id)}
+                    className="mt-4 bg-green-500 hover:bg-green-600 text-white py-3 px-6 text-lg rounded-xl font-semibold transition"
+                  >
+                    Захиалах
+                  </button>)
+                   }
+              
             </div>
           </div>
         );

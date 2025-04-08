@@ -17,7 +17,7 @@ const [userData, setuserData] = useState([]);
     useEffect(() => {
       if (user) {
         axios
-          .get(`http://localhost:8000/api/lib/user/${user}`)
+          .get(`https://library-kjji.onrender.com/api/lib/user/${user}`)
           .then((res) => {
             setuserData(res.data.user);
           })
@@ -29,7 +29,7 @@ const [userData, setuserData] = useState([]);
     useEffect(() => {
       if (user) {
         axios
-          .get(`http://localhost:8000/api/lib/user/zahialga/${user}`)
+          .get(`https://library-kjji.onrender.com/api/lib/user/zahialga/${user}`)
           .then((res) => {
             setzahtoo(res.data.count);
           })
@@ -41,7 +41,7 @@ const [userData, setuserData] = useState([]);
     useEffect(() => {
       if (user) {
         axios
-          .get(`http://localhost:8000/api/lib/user/zeel/${user}`)
+          .get(`https://library-kjji.onrender.com/api/lib/user/zeel/${user}`)
           .then((res) => {
             setZeeltoo(res.data.count);
           })

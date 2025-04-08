@@ -15,7 +15,7 @@ const SanchZahialga = () => {
     useEffect(() => {
         if (sanch) {
           axios
-            .get(`http://localhost:8000/api/lib/zeel`)
+            .get(`https://library-kjji.onrender.com/api/lib/zeel`)
             .then((res) => {
               setZeeltoo(res.data.count);
             })
@@ -27,7 +27,7 @@ const SanchZahialga = () => {
       useEffect(() => {
         if (sanch) {
           axios
-            .get(`http://localhost:8000/api/lib/zahialga`)
+            .get(`https://library-kjji.onrender.com/api/lib/zahialga`)
             .then((res) => {
               setzahtoo(res.data.count);
             })

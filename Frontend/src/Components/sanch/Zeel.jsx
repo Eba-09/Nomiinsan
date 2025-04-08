@@ -14,7 +14,7 @@ const Zeel = () => {
   useEffect(() => {
     if (sanch) {
       axios
-        .get(`http://localhost:8000/api/lib/zeel`)
+        .get(`https://library-kjji.onrender.com/api/lib/zeel`)
         .then((res) => {
           setcount(res.data.count)
           const zahialguud = res.data.data.map((zeel, index) => ({
@@ -51,7 +51,7 @@ const Zeel = () => {
   };
   const handleSave = () => {
     axios
-      .put(`http://localhost:8000/api/lib/zeel/${selectedId}`, {ugsun : status })
+      .put(`https://library-kjji.onrender.com/api/lib/zeel/${selectedId}`, {ugsun : status })
       .then(() => {
         setIsModalOpen(false);
         alert('Захиалгын төлөв амжилттай өөрчлөгдлөө');

@@ -16,7 +16,7 @@ const UserLogin = () => {
     const { login } = useContext(AuthContext);
     const logSubmit = (e) => {
       e.preventDefault();
-      axios.post('http://localhost:8000/api/lib/user/login', {oyutniCode, password})
+      axios.post('https://library-kjji.onrender.com/api/lib/user/login', {oyutniCode, password})
         .then(result => {
           if (result.data.success) {
             alert("Амжилттай нэвтэрлээ");

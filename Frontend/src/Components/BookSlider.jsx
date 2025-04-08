@@ -19,7 +19,7 @@ function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
   const Zahialah = (nomCode) => {
     if (user) {
       axios
-           .post('http://localhost:8000/api/lib/zahialga', {
+           .post('https://library-kjji.onrender.com/api/lib/zahialga', {
                 nomCode: nomCode,
                 userCode: user
             })
@@ -45,17 +45,7 @@ function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
       navigate('/oneBook', {state: {bookid : bookid}})
     }
   }
-  const BookDelete = (book) =>{
-    axios
-        .delete(`http://localhost:8000/api/lib/book/${book}`)
-        .then((res)=>{
-          alert("Амжилттай ном устлаа");
-        })
-        .catch((e)=>{
-          console.log(e);
-          alert("Ном устгах амжилтгүй боллоо")
-        })
-  }
+  
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-2">
@@ -85,7 +75,7 @@ function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
             >
               <img
               onClick={() => OneBook(book._id)}
-                src={`http://localhost:8000${book.photo}`}
+                src={`https://library-kjji.onrender.com${book.photo}`}
                 alt={book.name}
                 className="w-30 h-40 object-cover bg-cover rounded-t-2xl"
               />
@@ -96,9 +86,7 @@ function BookSlider({ catid = "", title = "Popular Books", books = [] }) {
                 <p className="text-sm text-center text-gray-800 line-clamp-1">
                     {book.authorId?.AuthorLname || "Unknown Author"}
                 </p>
-                { sanch ? (<button className="bg-green-300 hover:bg-green-500
-                 rounded-2xl text-sm text-center pl-1.5 pr-1.5 w-20 md:w-40 sm:w-25"
-                  onClick={() => BookDelete(book._id)}>Устгах</button>)
+                { sanch ? null
                    : (<button className="bg-green-300 hover:bg-green-500 rounded-2xl text-sm
                      text-center pl-1.5 pr-1.5 w-20 md:w-40 sm:w-25" onClick={() => Zahialah(book._id)}>Захиалах</button>)
                    }

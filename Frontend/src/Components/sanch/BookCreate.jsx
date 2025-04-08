@@ -32,12 +32,12 @@ const BookCreate = () => {
     const [AuthorLname,setAuthorLname ] = useState('');
     const [AuthorPhone,setAuthorPhone ] = useState('');
     useEffect(() => {
-        axios.get('http://localhost:8000/api/lib/author')
+        axios.get('https://library-kjji.onrender.com/api/lib/author')
             .then(response => setAuthors(response.data.data))
             .catch(error => console.log(error));
     }, []);
     useEffect(() => {
-        axios.get('http://localhost:8000/api/lib/category')
+        axios.get('https://library-kjji.onrender.com/api/lib/category')
             .then(response => setCategories(response.data.data))
             .catch(error => console.log(error));
     }, []);
@@ -50,7 +50,7 @@ const BookCreate = () => {
   const authorCreate = () =>{
     if(AuthorFname && AuthorLname){
         axios
-        .post('http://localhost:8000/api/lib/author', {AuthorFname, AuthorLname, AuthorPhone})
+        .post('https://library-kjji.onrender.com/api/lib/author', {AuthorFname, AuthorLname, AuthorPhone})
         .then((res) => {
             alert("Амжилттай зохиолч нэмлээ.")
             }
@@ -85,7 +85,7 @@ const BookCreate = () => {
     formData.append("category", category);
     formData.append("createUser", createUser);
 
-    axios.post('http://localhost:8000/api/lib/book', formData, {
+    axios.post('https://library-kjji.onrender.com/api/lib/book', formData, {
         headers: {
             'Content-Type': 'multipart/form-data', // Энэ нь файл илгээх формат юм
         },

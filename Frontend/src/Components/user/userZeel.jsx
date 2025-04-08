@@ -7,7 +7,7 @@ const UserZeel = ({ user }) => {
   useEffect(() => {
     if (user) {
       axios
-        .get(`http://localhost:8000/api/lib/user/zeel/${user}`)
+        .get(`https://library-kjji.onrender.com/api/lib/user/zeel/${user}`)
         .then((res) => {
           const zahialguud = res.data.data.map((zeel, index) => ({
             id: zeel._id,

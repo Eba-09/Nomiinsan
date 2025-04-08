@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
 
     if (storedToken) {
       // Токен байгаа тохиолдолд хэрэглэгчийн мэдээлэл авах
-      fetch("http://localhost:8000/api/lib/user/me", {
+      fetch("https://library-kjji.onrender.com/api/lib/user/me", {
         headers: {
           Authorization: `Bearer ${storedToken}`,
         },
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
     setsanchToken(storedToken);
     if (storedToken) {
       // Токен байгаа тохиолдолд хэрэглэгчийн мэдээлэл авах
-      fetch("http://localhost:8000/api/lib/nomsanch/me", {
+      fetch("https://library-kjji.onrender.com/api/lib/nomsanch/me", {
         headers: {
           Authorization: `Bearer ${storedToken}`,
         },

@@ -10,7 +10,7 @@ function LibraryHome() {
   const [catid, setcatid] = useState('');
   useEffect(() => {
     axios
-      .get('http://localhost:8000/api/lib/category/book/67f131d44f4702327dac47e8')
+      .get('https://library-kjji.onrender.com/api/lib/category/book/67f131d44f4702327dac47e8')
       .then((res) => {
         const books = res.data.data;
         const grouped = books.reduce((acc, book) => {

@@ -11,7 +11,7 @@ const SanchHome = () => {
   if (sanch) {
     console.log(sanch)
     axios
-      .get(`http://localhost:8000/api/lib/nomsanch/${sanch}`)
+      .get(`https://library-kjji.onrender.com/api/lib/nomsanch/${sanch}`)
       .then((res) => {
         setsanchData(res.data.data);
       })
@@ -23,7 +23,7 @@ const SanchHome = () => {
 useEffect(() => {
   if (sanch) {
     axios
-      .get(`http://localhost:8000/api/lib/sanch/zeel/${sanch}`)
+      .get(`https://library-kjji.onrender.com/api/lib/sanch/zeel/${sanch}`)
       .then((res) => {
         setSanchZeel(res.data.count);
       })

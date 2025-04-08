@@ -34,7 +34,7 @@ function App() {
   const [books, setBooks] = useState([]);
   const [filtered, setFiltered] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:8000/api/lib/book') // Энд API замаа тохируул
+    axios.get('https://library-kjji.onrender.com/api/lib/book') // Энд API замаа тохируул
       .then((res) => setBooks(res.data.data))
       .catch((err) => console.error('Ном татахад алдаа:', err));
   }, []);

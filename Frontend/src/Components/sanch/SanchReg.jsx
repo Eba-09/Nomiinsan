@@ -16,7 +16,7 @@ const SanchReg = () => {
   const SanchSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:8000/api/lib/nomsanch', {
+      .post('https://library-kjji.onrender.com/api/lib/nomsanch', {
         sanchFN, sanchLN, sanchUtas, sanchPassword, sanchMail
       })
       .then(result =>{ 
